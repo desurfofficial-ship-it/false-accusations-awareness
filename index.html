@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +10,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    // Apply saved theme before paint to prevent flash
+    (function() {
+      try {
+        var t = localStorage.getItem('fa-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
-  <a class="skip-link" href="#cases">Skip to case archive</a>
+  <a class="skip-link" href="#archive">Skip to case archive</a>
 
   <!-- Top bar -->
   <div class="topbar">
@@ -26,6 +35,10 @@
         <a href="#archive">Archive</a>
         <a href="#principles">Principles</a>
         <a href="#about">About</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
         <a class="ghost-btn" href="https://github.com/desurfofficial-ship-it/false-accusations-awareness" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -43,10 +56,10 @@
       <h1>When the<br><em>accusation</em><br>was the crime.</h1>
       <p class="tagline">A documented archive of high-profile false accusations and wrongful convictions from across the world &mdash; cases later disproven by DNA, confession, admission of fabrication, or official exoneration. Compiled so society remembers to demand evidence, due process, and restraint.</p>
       <div class="hero-stats">
-        <div class="hstat"><span class="num">21</span><span class="label">Cases</span></div>
+        <div class="hstat"><span class="num">51</span><span class="label">Cases</span></div>
         <div class="hstat"><span class="num">10</span><span class="label">Countries</span></div>
         <div class="hstat"><span class="num">1931&ndash;2024</span><span class="label">Time span</span></div>
-        <div class="hstat"><span class="num">100+</span><span class="label">Years wrongfully served</span></div>
+        <div class="hstat"><span class="num">350+</span><span class="label">Years wrongfully served</span></div>
       </div>
     </div>
   </header>
@@ -68,38 +81,65 @@
       </div>
     </section>
 
-    <!-- World map / country list -->
-    <section class="countries container">
+    <!-- Search + filter controls -->
+    <section class="controls container" id="archive">
       <div class="section-head">
-        <h2>Cases by country</h2>
-        <p class="section-sub">Filter the archive below</p>
+        <h2>The archive</h2>
+        <p class="section-sub">51 documented cases &middot; search by name, country, year, or category</p>
       </div>
-      <div class="chips">
-        <button class="chip is-active" data-filter="all">All <span class="count">21</span></button>
-        <button class="chip" data-filter="AU">&#127462;&#127482; Australia <span class="count">1</span></button>
-        <button class="chip" data-filter="CA">&#127464;&#127462; Canada <span class="count">3</span></button>
-        <button class="chip" data-filter="FR">&#127467;&#127479; France <span class="count">2</span></button>
+
+      <div class="search-wrap">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="search-input" placeholder="Search cases, names, years, countries, categories&hellip;" autocomplete="off" aria-label="Search the case archive">
+        <button id="search-clear" class="search-clear" aria-label="Clear search">&times;</button>
+        <span id="result-count" class="result-count">51 cases</span>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-label">Country:</span>
+        <div class="chips">
+          <button class="chip is-active" data-filter="all">All <span class="count">51</span></button>
+        <button class="chip" data-filter="AU">&#127462;&#127482; Australia <span class="count">5</span></button>
+        <button class="chip" data-filter="CA">&#127464;&#127462; Canada <span class="count">5</span></button>
+        <button class="chip" data-filter="FR">&#127467;&#127479; France <span class="count">5</span></button>
         <button class="chip" data-filter="IE">&#127470;&#127466; Ireland <span class="count">1</span></button>
         <button class="chip" data-filter="IT">&#127470;&#127481; Italy <span class="count">1</span></button>
         <button class="chip" data-filter="JP">&#127471;&#127477; Japan <span class="count">1</span></button>
         <button class="chip" data-filter="NZ">&#127464;&#127476; New Zealand <span class="count">1</span></button>
         <button class="chip" data-filter="SE">&#127480;&#127466; Sweden <span class="count">1</span></button>
-        <button class="chip" data-filter="UK">&#127468;&#127463; United Kingdom <span class="count">5</span></button>
-        <button class="chip" data-filter="US">&#127482;&#127480; United States <span class="count">5</span></button>
+        <button class="chip" data-filter="UK">&#127468;&#127463; United Kingdom <span class="count">13</span></button>
+        <button class="chip" data-filter="US">&#127482;&#127480; United States <span class="count">18</span></button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-label">Type:</span>
+        <div class="chips">
+          <button class="chip cat-chip is-active" data-cat="all">All types</button>
+        <button class="chip cat-chip" data-cat="Murder">Murder <span class="count">26</span></button>
+        <button class="chip cat-chip" data-cat="Rape / Murder">Rape / Murder <span class="count">6</span></button>
+        <button class="chip cat-chip" data-cat="Rape">Rape <span class="count">5</span></button>
+        <button class="chip cat-chip" data-cat="Terrorism / Murder">Terrorism / Murder <span class="count">3</span></button>
+        <button class="chip cat-chip" data-cat="Murder (cot death)">Murder (cot death) <span class="count">3</span></button>
+        <button class="chip cat-chip" data-cat="Child sexual abuse (mass false)">Child sexual abuse (mass false) <span class="count">2</span></button>
+        <button class="chip cat-chip" data-cat="Sexual assault">Sexual assault <span class="count">1</span></button>
+        <button class="chip cat-chip" data-cat="Murder / Arson">Murder / Arson <span class="count">1</span></button>
+        <button class="chip cat-chip" data-cat="Serial murder (confessed)">Serial murder (confessed) <span class="count">1</span></button>
+        <button class="chip cat-chip" data-cat="Theft / Fraud (mass)">Theft / Fraud (mass) <span class="count">1</span></button>
+        <button class="chip cat-chip" data-cat="Child sexual abuse">Child sexual abuse <span class="count">1</span></button>
+        <button class="chip cat-chip" data-cat="Terrorism">Terrorism <span class="count">1</span></button>
+        </div>
       </div>
     </section>
 
     <!-- Case archive -->
-    <section class="cases container" id="archive">
-      <div class="section-head">
-        <h2>The archive</h2>
-        <p class="section-sub">21 documented cases &middot; ordered chronologically (most recent first)</p>
-      </div>
-      <div class="case-list">
-              <article class="case-card" data-country="US" data-year="2006" id="duke-lacrosse">
+    <section class="cases container">
+      <div class="case-list" id="case-list">
+              <article class="case-card" data-country="US" data-year="2006" data-category="Rape" data-search="duke lacrosse case united states 2006 rape three duke university lacrosse players accused of rape at a team party. charges dropped in 2007; north carolina attorney general declared them innocent. no dna supported the claim. david evans collin finnerty reade seligmann crystal mangum. in december 2024, while incarcerated for an unrelated murder conviction, she publicly admitted she fabricated the story, saying she &amp;ldquo;testified falsely&amp;rdquo; and &amp;ldquo;made up a story that wasn&amp;rsquo;t true&amp;rdquo; because she wanted validation." id="duke-lacrosse">
         <div class="case-media">
           <img src="assets/img/duke-lacrosse.svg" alt="Case illustration: Duke Lacrosse Case" loading="lazy">
           <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Rape</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -115,7 +155,7 @@
               <ul><li>David Evans</li><li>Collin Finnerty</li><li>Reade Seligmann</li></ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p><strong>Crystal Mangum</strong>. In December 2024, while incarcerated for an unrelated murder conviction, she publicly admitted she fabricated the story, saying she &ldquo;testified falsely&rdquo; and &ldquo;made up a story that wasn&rsquo;t true&rdquo; because she wanted validation.</p>
             </div>
             <div class="col">
@@ -128,10 +168,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="US" data-year="2002" id="brian-banks">
+      <article class="case-card" data-country="US" data-year="2002" data-category="Rape" data-search="brian banks united states 2002 rape standout high-school football player (long beach poly) with a scholarship offer to usc. arrested at 16 after a classmate accused him of rape. faced a possible decades-long sentence; accepted a plea and served over five years in prison plus five years on parole and sex-offender registration. brian banks wanetta gibson. in 2011 she contacted banks on facebook. in a meeting recorded by a private investigator she admitted the accusation was fabricated. she later confirmed the lie to prosecutors. conviction formally dismissed in 2012." id="brian-banks">
         <div class="case-media">
           <img src="assets/img/brian-banks.svg" alt="Case illustration: Brian Banks" loading="lazy">
           <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Rape</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -147,7 +188,7 @@
               <ul><strong>Brian Banks</strong></ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p><strong>Wanetta Gibson</strong>. In 2011 she contacted Banks on Facebook. In a meeting recorded by a private investigator she admitted the accusation was fabricated. She later confirmed the lie to prosecutors. Conviction formally dismissed in 2012.</p>
             </div>
             <div class="col">
@@ -160,10 +201,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="US" data-year="1989" id="central-park-five">
+      <article class="case-card" data-country="US" data-year="1989" data-category="Rape / Murder" data-search="central park five / exonerated five united states 1989 rape / murder five teenagers convicted of the rape and assault of a jogger. served 6&amp;ndash;13 years. convictions vacated in 2002. antron mccray kevin richardson yusef salaam raymond santana korey wise matias reyes &amp;mdash; serial rapist who confessed in 2002 that he alone committed the attack. dna confirmed his guilt and excluded the five. original case rested heavily on confessions later found to have been coerced." id="central-park-five">
         <div class="case-media">
           <img src="assets/img/central-park-five.svg" alt="Case illustration: Central Park Five / Exonerated Five" loading="lazy">
           <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Rape / Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -179,7 +221,7 @@
               <ul><li>Antron McCray</li><li>Kevin Richardson</li><li>Yusef Salaam</li><li>Raymond Santana</li><li>Korey Wise</li></ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p><strong>Matias Reyes</strong> &mdash; serial rapist who confessed in 2002 that he alone committed the attack. DNA confirmed his guilt and excluded the five. Original case rested heavily on confessions later found to have been coerced.</p>
             </div>
             <div class="col">
@@ -192,10 +234,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="IT" data-year="2007" id="amanda-knox">
+      <article class="case-card" data-country="IT" data-year="2007" data-category="Murder" data-search="amanda knox &amp; raffaele sollecito italy 2007 murder convicted of the murder of knox&amp;rsquo;s roommate meredith kercher in perugia, italy. they spent nearly four years in prison. after a long series of trials and appeals, italy&amp;rsquo;s highest court declared them innocent in 2015, citing &amp;ldquo;stunning flaws&amp;rdquo; in the investigation and a rush to judgment under intense media pressure. amanda knox (american exchange student) and raffaele sollecito (her then-boyfriend) rudy guede was separately convicted of the murder (his dna was at the scene) and served a reduced sentence. the case against knox and sollecito relied on contested forensic claims and media-driven narrative rather than solid evidence linking them to the crime." id="amanda-knox">
         <div class="case-media">
           <img src="assets/img/amanda-knox.svg" alt="Case illustration: Amanda Knox &amp; Raffaele Sollecito" loading="lazy">
           <div class="case-flag">&#127470;&#127481;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -211,7 +254,7 @@
               <ul><strong>Amanda Knox</strong> (American exchange student) and <strong>Raffaele Sollecito</strong> (her then-boyfriend)</ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p><strong>Rudy Guede</strong> was separately convicted of the murder (his DNA was at the scene) and served a reduced sentence. The case against Knox and Sollecito relied on contested forensic claims and media-driven narrative rather than solid evidence linking them to the crime.</p>
             </div>
             <div class="col">
@@ -224,10 +267,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="US" data-year="1931" id="scottsboro-boys">
+      <article class="case-card" data-country="US" data-year="1931" data-category="Rape" data-search="scottsboro boys united states 1931 rape nine african-american teenagers and young men accused of raping two white women on a train in alabama. eight initially sentenced to death. multiple trials and appeals over years. nine black youths aged 13&amp;ndash;20, including haywood patterson, clarence norris, and olen montgomery victoria price and ruby bates. one later recanted parts of her testimony. evidence of fabrication and racial bias became clear over time. all were eventually freed or had convictions overturned; posthumous pardons followed." id="scottsboro-boys">
         <div class="case-media">
           <img src="assets/img/scottsboro-boys.svg" alt="Case illustration: Scottsboro Boys" loading="lazy">
           <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Rape</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -243,7 +287,7 @@
               <ul>Nine Black youths aged 13&ndash;20, including Haywood Patterson, Clarence Norris, and Olen Montgomery</ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p><strong>Victoria Price</strong> and <strong>Ruby Bates</strong>. One later recanted parts of her testimony. Evidence of fabrication and racial bias became clear over time. All were eventually freed or had convictions overturned; posthumous pardons followed.</p>
             </div>
             <div class="col">
@@ -256,10 +300,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="US" data-year="1985" id="steven-avery">
+      <article class="case-card" data-country="US" data-year="1985" data-category="Sexual assault" data-search="steven avery &amp;mdash; first conviction united states 1985 sexual assault convicted of sexual assault and attempted murder of a woman on a lake michigan beach despite multiple alibi witnesses. served 18 years before dna testing identified the real attacker. steven avery gregory allen &amp;mdash; a convicted felon whose dna matched the crime-scene evidence. avery was freed in 2003." id="steven-avery">
         <div class="case-media">
           <img src="assets/img/steven-avery.svg" alt="Case illustration: Steven Avery &amp;mdash; First Conviction" loading="lazy">
           <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Sexual assault</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -275,7 +320,7 @@
               <ul><strong>Steven Avery</strong></ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p><strong>Gregory Allen</strong> &mdash; a convicted felon whose DNA matched the crime-scene evidence. Avery was freed in 2003.</p>
             </div>
             <div class="col">
@@ -288,10 +333,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="UK" data-year="1974" id="birmingham-six">
+      <article class="case-card" data-country="UK" data-year="1974" data-category="Terrorism / Murder" data-search="birmingham six united kingdom 1974 terrorism / murder six irish men wrongly convicted of the 1974 birmingham pub bombings that killed 21 people. sentenced to life imprisonment based on fabricated confessions and discredited forensic evidence. after 16 years in prison, their convictions were quashed by the court of appeal in 1991, exposing one of the worst miscarriages of justice in british history. hugh callaghan patrick hill gerard hunter richard mcilkenny william power john walker no actual bomber was ever convicted for the attack. the case rested on coerced statements and on forensic tests (the griess test) later shown to be unreliable &amp;mdash; handling of the men&amp;rsquo;s hands had produced false positives for explosives." id="birmingham-six">
         <div class="case-media">
           <img src="assets/img/birmingham-six.svg" alt="Case illustration: Birmingham Six" loading="lazy">
           <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Terrorism / Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -320,10 +366,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="UK" data-year="1974" id="guildford-four">
+      <article class="case-card" data-country="UK" data-year="1974" data-category="Terrorism / Murder" data-search="guildford four united kingdom 1974 terrorism / murder four people &amp;mdash; including gerry conlon, then 20 &amp;mdash; wrongly convicted of the 1974 guildford pub bombings that killed five and injured 65. convictions based on coerced confessions obtained under duress. after 15 years in prison, their convictions were quashed in 1989. gerry conlon&amp;rsquo;s story was later told in the film in the name of the father. gerry conlon paul hill patrick armstrong carole richardson the actual bombers were members of the ira&amp;rsquo;s active service unit, later identified but never charged for these specific attacks under a &amp;lsquo;no prosecution&amp;rsquo; decision. police fabricated confessions through intimidation and sleep deprivation." id="guildford-four">
         <div class="case-media">
           <img src="assets/img/guildford-four.svg" alt="Case illustration: Guildford Four" loading="lazy">
           <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Terrorism / Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -352,10 +399,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="AU" data-year="1980" id="lindy-chamberlain">
+      <article class="case-card" data-country="AU" data-year="1980" data-category="Murder" data-search="lindy chamberlain &amp;mdash; &amp;lsquo;a dingo took my baby&amp;rsquo; australia 1980 murder azaria chamberlain, nine weeks old, disappeared from a campsite at uluru (ayers rock) on 17 august 1980. her mother lindy insisted a dingo took the baby. media mockery, public disbelief, and a flawed investigation led to lindy being convicted of murder in 1982 and sentenced to life. she served over three years before new evidence (the baby&amp;rsquo;s matinee jacket, found near a dingo lair) triggered her release. conviction overturned in 1988; fourth coronial inquest in 2012 confirmed a dingo caused azaria&amp;rsquo;s death. lindy chamberlain-creighton and her then-husband michael chamberlain no person &amp;mdash; the prosecution was driven by forensic experts whose claims (about fetal blood in the family car) were later discredited. the actual cause was indeed a dingo attack, exactly as chamberlain had said from the first night." id="lindy-chamberlain">
         <div class="case-media">
           <img src="assets/img/lindy-chamberlain.svg" alt="Case illustration: Lindy Chamberlain &amp;mdash; &amp;lsquo;A dingo took my baby&amp;rsquo;" loading="lazy">
           <div class="case-flag">&#127462;&#127482;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -384,10 +432,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="UK" data-year="1975" id="stefan-kiszko">
+      <article class="case-card" data-country="UK" data-year="1975" data-category="Murder" data-search="stefan kiszko united kingdom 1975 murder an 11-year-old girl, lesley molseed, was stabbed to death in west yorkshire in 1975. police arrested stefan kiszko, a socially awkward local tax clerk with no history of violence. after two days of interrogation without a solicitor he &amp;lsquo;confessed&amp;rsquo;. convicted of murder in 1976, sentenced to life. served 16 years before dna evidence excluded him entirely. the real killer, ronald castree, was identified by dna in 2007. stefan kiszko &amp;mdash; had a medical condition (hypogonadism) that physically made the crime attributed to him impossible; this evidence was withheld by police. ronald castree was convicted by dna match in 2007, 32 years after the murder. kiszko died of a heart attack in 1993, just months after his release, never fully recovering from prison." id="stefan-kiszko">
         <div class="case-media">
           <img src="assets/img/stefan-kiszko.svg" alt="Case illustration: Stefan Kiszko" loading="lazy">
           <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -416,10 +465,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="CA" data-year="1969" id="david-milgaard">
+      <article class="case-card" data-country="CA" data-year="1969" data-category="Rape / Murder" data-search="david milgaard canada 1969 rape / murder gail miller, a saskatoon nursing aide, was raped and murdered in 1969. david milgaard, then 16, was wrongly convicted in 1970 based on contradictory witness statements and police pressure on his teenage friends. he spent 23 years in prison maintaining his innocence. the supreme court of canada quashed his conviction in 1992. dna evidence in 1997 confirmed the real killer was larry fisher. david milgaard &amp;mdash; was 16 when arrested, 17 when convicted of a crime he did not commit. spent his entire young adulthood in prison. larry fisher, a serial rapist who lived near the crime scene. fisher was convicted in 1999 on the basis of the dna evidence that exonerated milgaard." id="david-milgaard">
         <div class="case-media">
           <img src="assets/img/david-milgaard.svg" alt="Case illustration: David Milgaard" loading="lazy">
           <div class="case-flag">&#127464;&#127462;</div>
+          <div class="case-cat">Rape / Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -448,10 +498,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="CA" data-year="1959" id="steven-truscott">
+      <article class="case-card" data-country="CA" data-year="1959" data-category="Murder" data-search="steven truscott canada 1959 murder lynne harper, 12, was murdered in rural ontario in 1959. steven truscott, then 14, was the last person seen with her. after a sensational 15-day trial he became the youngest person in canada sentenced to hang. the sentence was commuted to life. he was paroled in 1969. decades of investigation by journalist isabel lebourdais and others exposed the flawed case. in 2007 the ontario court of appeal acquitted him, finding the conviction a &amp;lsquo;miscarriage of justice&amp;rsquo;. steven truscott &amp;mdash; was 14 years old at the time of the alleged crime and was sentenced to death by hanging at age 14. the actual perpetrator was never identified. the case rested on flawed forensic timing evidence (time of death) that was later shown to be unreliable, and on a rushed investigation that excluded other viable suspects." id="steven-truscott">
         <div class="case-media">
           <img src="assets/img/steven-truscott.svg" alt="Case illustration: Steven Truscott" loading="lazy">
           <div class="case-flag">&#127464;&#127462;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -480,10 +531,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="JP" data-year="1964" id="iwao-hakamada">
+      <article class="case-card" data-country="JP" data-year="1964" data-category="Murder / Arson" data-search="iwao hakamada japan 1964 murder / arson a former professional boxer, hakamada was convicted in 1968 of murdering his employer&amp;rsquo;s family and burning their house in shizuoka, japan. he &amp;lsquo;confessed&amp;rsquo; after 20 days of interrogation without a lawyer. sentenced to death in 1980. he was the world&amp;rsquo;s longest-serving death row inmate when released in 2014 after dna evidence raised doubts. the prosecution fought his retrial for a decade. in september 2024 the shizuoka district court formally acquitted him &amp;mdash; 56 years after his arrest. iwao hakamada &amp;mdash; spent 48 years on death row, much of it in solitary confinement. he is now in his late 80s and lives with severe mental-health consequences. the actual perpetrator was never found. the conviction rested on a coerced confession and on &amp;lsquo;evidence&amp;rsquo; (blood-stained pajamas) that prosecutors were later found to have fabricated or planted. five items of exculpatory evidence were withheld from the defense for decades." id="iwao-hakamada">
         <div class="case-media">
           <img src="assets/img/iwao-hakamada.svg" alt="Case illustration: Iwao Hakamada" loading="lazy">
           <div class="case-flag">&#127471;&#127477;</div>
+          <div class="case-cat">Murder / Arson</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -499,7 +551,7 @@
               <ul><strong>Iwao Hakamada</strong> &mdash; spent 48 years on death row, much of it in solitary confinement. He is now in his late 80s and lives with severe mental-health consequences.</ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p>The actual perpetrator was never found. The conviction rested on a coerced confession and on &lsquo;evidence&rsquo; (blood-stained pajamas) that prosecutors were later found to have fabricated or planted. Five items of exculpatory evidence were withheld from the defense for decades.</p>
             </div>
             <div class="col">
@@ -512,10 +564,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="SE" data-year="1994" id="sture-bergwall">
+      <article class="case-card" data-country="SE" data-year="1994" data-category="Serial murder (confessed)" data-search="sture bergwall (formerly &amp;lsquo;thomas quick&amp;rsquo;) sweden 1994 serial murder (confessed) sture bergwall, a patient at a swedish psychiatric hospital, &amp;lsquo;confessed&amp;rsquo; under heavy medication and therapeutic pressure to more than 30 unsolved murders across scandinavia between 1994 and 2001. he was convicted of eight. investigative journalists exposed that the confessions were induced, that therapists fed him crime details, and that no physical evidence linked him to any murder. all eight convictions were quashed between 2008 and 2013. none of the murders has been re-solved. sture bergwall &amp;mdash; himself an offender (he had committed non-lethal violent crimes) but not a serial killer. his &amp;lsquo;confessions&amp;rsquo; were the product of recovered-memory therapy and sedation. no actual perpetrator was identified in any of the eight cases. bergwall&amp;rsquo;s confessions led investigators away from real suspects, and the cases went cold." id="sture-bergwall">
         <div class="case-media">
           <img src="assets/img/sture-bergwall.svg" alt="Case illustration: Sture Bergwall (formerly &amp;lsquo;Thomas Quick&amp;rsquo;)" loading="lazy">
           <div class="case-flag">&#127480;&#127466;</div>
+          <div class="case-cat">Serial murder (confessed)</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -531,7 +584,7 @@
               <ul><strong>Sture Bergwall</strong> &mdash; himself an offender (he had committed non-lethal violent crimes) but not a serial killer. His &lsquo;confessions&rsquo; were the product of recovered-memory therapy and sedation.</ul>
             </div>
             <div class="col">
-              <h4>Person who lied / Real perpetrator</h4>
+              <h4>Accuser / Real perpetrator</h4>
               <p>No actual perpetrator was identified in any of the eight cases. Bergwall&rsquo;s confessions led investigators away from real suspects, and the cases went cold.</p>
             </div>
             <div class="col">
@@ -544,10 +597,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="UK" data-year="1999" id="post-office-horizon">
+      <article class="case-card" data-country="UK" data-year="1999" data-category="Theft / Fraud (mass)" data-search="uk post office / horizon scandal united kingdom 1999 theft / fraud (mass) between 1999 and 2015 the uk post office prosecuted over 700 sub-postmasters and sub-postmistresses for theft, false accounting, and fraud. the accusations were based on the defective horizon it system, which produced phantom shortfalls. lives were destroyed: imprisonments, bankruptcies, divorces, suicides. the post office denied for years that the software could be wrong. a 2019 high court ruling proved it could. mass convictions began being quashed in 2021. by 2024 fewer than 100 had been overturned; the public inquiry reported in 2024. more than 700 uk post office branch managers, including alan bates (whose fight inspired the 2024 itv drama), lee castleton (bankrupted defending himself), seeta misra (the first to be prosecuted, jailed while pregnant), and many other ordinary people trusted to run local post offices. fujitsu / post office ltd. the horizon it system, supplied by fujitsu, generated false accounting entries. post office executives aggressively prosecuted despite internal warnings. ceo paula vennells later returned her cbe." id="post-office-horizon">
         <div class="case-media">
           <img src="assets/img/post-office-horizon.svg" alt="Case illustration: UK Post Office / Horizon Scandal" loading="lazy">
           <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Theft / Fraud (mass)</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -576,10 +630,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="UK" data-year="2001" id="barry-george">
+      <article class="case-card" data-country="UK" data-year="2001" data-category="Murder" data-search="barry george united kingdom 2001 murder bbc television presenter jill dando was shot dead on her doorstep in april 1999. the murder shocked britain. after a year-long investigation, police arrested barry george, a local man with mental-health problems and a history of obsessions but no history of violence. convicted in 2001 on the basis of a single particle of firearms residue in his coat pocket. sentenced to life. after eight years the court of appeal quashed the conviction; he was acquitted at retrial in 2008. barry george &amp;mdash; had learning difficulties and epilepsy; was unable to effectively assist in his own defense during the original trial. the real killer has never been identified. the firearms-residue evidence was later shown to be of no probative value (it could have come from countless sources, including police handling)." id="barry-george">
         <div class="case-media">
           <img src="assets/img/barry-george.svg" alt="Case illustration: Barry George" loading="lazy">
           <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -608,10 +663,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="FR" data-year="1986" id="patrick-dils">
+      <article class="case-card" data-country="FR" data-year="1986" data-category="Murder" data-search="patrick dils france 1986 murder patrick dils, 16, was convicted in 1989 of the 1986 hammer-murder of two children in montigny-lès-metz, eastern france &amp;mdash; the youngest person ever sentenced to life in france at the time. he &amp;lsquo;confessed&amp;rsquo; after sustained police interrogation. the real killer was serial murderer francis heaulme, who was at the scene and whose modus operandi matched. after years of legal battle dils was exonerated in 2002. patrick dils &amp;mdash; was 16 at the time of arrest; spent 15 years in prison before exoneration. francis heaulme, one of france&amp;rsquo;s most prolific serial killers, was identified as the real murderer. heaulme was separately convicted of multiple murders but was not initially linked to montigny because police had already &amp;lsquo;solved&amp;rsquo; the case with dils." id="patrick-dils">
         <div class="case-media">
           <img src="assets/img/patrick-dils.svg" alt="Case illustration: Patrick Dils" loading="lazy">
           <div class="case-flag">&#127467;&#127479;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -640,10 +696,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="CA" data-year="1984" id="guy-paul-morin">
+      <article class="case-card" data-country="CA" data-year="1984" data-category="Rape / Murder" data-search="guy paul morin canada 1984 rape / murder christine jessop, 9, was abducted, raped, and murdered in queensville, ontario in 1984. guy paul morin, her 25-year-old neighbor, was charged in 1985. he was acquitted at his first trial in 1986; the court of appeal ordered a retrial; he was convicted in 1992 and sentenced to life. dna testing in 1995 excluded him. conviction overturned in 1996. the real killer, calvin hoover, was identified by dna in 2020. guy paul morin &amp;mdash; a quiet, introverted man whose odd behavior (collecting insects, playing the clarinet) made him a target of suspicion. calvin hoover, a neighbor of the jessop family, was identified by dna in 2020 (he had died by suicide in 2015). the original case rested on a coerced jailhouse-informant testimony and flawed forensic evidence." id="guy-paul-morin">
         <div class="case-media">
           <img src="assets/img/guy-paul-morin.svg" alt="Case illustration: Guy Paul Morin" loading="lazy">
           <div class="case-flag">&#127464;&#127462;</div>
+          <div class="case-cat">Rape / Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -672,10 +729,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="NZ" data-year="1970" id="arthur-allan-thomas">
+      <article class="case-card" data-country="NZ" data-year="1970" data-category="Murder" data-search="arthur allan thomas new zealand 1970 murder jeanette and harvey crewe were murdered in their farmhouse in pukekawa, new zealand, in june 1970. police focused on arthur allan thomas, a neighbor. he was convicted in 1971 and again at retrial in 1973, on the basis of a single .22 cartridge case allegedly found in his garden. both convictions rested on evidence later shown to have been planted by police. a royal commission in 1980 found police had fabricated evidence. thomas received a royal pardon in 1979. arthur allan thomas &amp;mdash; a new zealand farmer who spent 9 years in prison for a crime he did not commit. the case divided the nation for a decade. the real killer was never charged. the royal commission found police had planted the cartridge case to frame thomas; no physical evidence actually linked him to the murders." id="arthur-allan-thomas">
         <div class="case-media">
           <img src="assets/img/arthur-allan-thomas.svg" alt="Case illustration: Arthur Allan Thomas" loading="lazy">
           <div class="case-flag">&#127464;&#127476;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -704,10 +762,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="FR" data-year="1991" id="omar-raddad">
+      <article class="case-card" data-country="FR" data-year="1991" data-category="Murder" data-search="omar raddad &amp;mdash; &amp;lsquo;omar m&amp;rsquo;a tuer&amp;rsquo; france 1991 murder ghislaine marchal, a wealthy french widow, was found murdered in her villa in mougins (french riviera) in 1991. the message &amp;lsquo;omar m&amp;rsquo;a tu&amp;eacute;e&amp;rsquo; (&amp;lsquo;omar killed me&amp;rsquo;) was written in her blood on a door. omar raddad, her moroccan gardener, was convicted in 1994 despite no physical evidence linking him to the crime, multiple inconsistencies in the blood-message analysis, and an alibi. he served 7 years before being granted a partial pardon by president chirac in 1996. a re-trial was denied despite later dna evidence suggesting another perpetrator. omar raddad &amp;mdash; a moroccan migrant gardener whose conviction became a cause c&amp;eacute;lèbre in france and a focal point for accusations of systemic racism in the french justice system. the true perpetrator was never identified. dna recovered from the scene in 2015 (from door handles and an unknown male) did not match raddad, but french courts denied a retrial." id="omar-raddad">
         <div class="case-media">
           <img src="assets/img/omar-raddad.svg" alt="Case illustration: Omar Raddad &amp;mdash; &amp;lsquo;Omar m&amp;rsquo;a tuer&amp;rsquo;" loading="lazy">
           <div class="case-flag">&#127467;&#127479;</div>
+          <div class="case-cat">Murder</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -736,10 +795,11 @@
         </div>
       </article>
 
-      <article class="case-card" data-country="IE" data-year="1995" id="nora-wall">
+      <article class="case-card" data-country="IE" data-year="1995" data-category="Child sexual abuse" data-search="sister nora wall ireland 1995 child sexual abuse nora wall, a irish religious sister (sister of mercy), was convicted in 1999 of raping a child in her care at a dublin residential home in the late 1970s. the case rested on the testimony of the complainant, who was later shown to have made false allegations in other contexts, and on the testimony of a second witness whose evidence the prosecution had wrongly characterized. the court of appeal quashed the conviction after just four days. it was the first quashed conviction in ireland&amp;rsquo;s history of clerical-abuse prosecutions. sister nora wall &amp;mdash; a nun who ran a dublin children&amp;rsquo;s home. the accusation destroyed her reputation; the quashing came too late to repair it. the principal complainant later faced unrelated charges of making false allegations in other cases. the dpp subsequently apologized for the flawed prosecution." id="nora-wall">
         <div class="case-media">
           <img src="assets/img/nora-wall.svg" alt="Case illustration: Sister Nora Wall" loading="lazy">
           <div class="case-flag">&#127470;&#127466;</div>
+          <div class="case-cat">Child sexual abuse</div>
         </div>
         <div class="case-body">
           <div class="case-meta">
@@ -767,6 +827,999 @@
           <a class="source-link" href="https://en.wikipedia.org/wiki/Nora_Wall" target="_blank" rel="noopener">Read the public record &rarr;</a>
         </div>
       </article>
+
+      <article class="case-card" data-country="UK" data-year="2003" data-category="Rape" data-search="andrew malkinson united kingdom 2003 rape andrew malkinson was convicted in 2003 of a 1999 rape in salford. the victim identified him in a flawed identification procedure; no forensic evidence linked him. he refused to admit guilt and was denied parole multiple times as a result. after 17 years in prison, dna testing in 2023 matched another man (peter mcfadden, deceased). the court of appeal quashed his conviction in july 2023. a 2024 investigation found greater manchester police had withheld crucial evidence. andrew malkinson &amp;mdash; spent 17 years in prison, refused parole because he would not admit guilt. maintained innocence throughout. peter mcfadden, identified by dna in 2023, was a serial sex offender who had died in 2021. he had never been a suspect in the original investigation." id="andrew-malkinson">
+        <div class="case-media">
+          <img src="assets/img/andrew-malkinson.svg" alt="Case illustration: Andrew Malkinson" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Rape</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2003</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Exonerated by DNA · 2023</span>
+          </div>
+          <h3>Andrew Malkinson</h3>
+          <p class="case-blurb">Andrew Malkinson was convicted in 2003 of a 1999 rape in Salford. The victim identified him in a flawed identification procedure; no forensic evidence linked him. He refused to admit guilt and was denied parole multiple times as a result. After 17 years in prison, DNA testing in 2023 matched another man (Peter McFadden, deceased). The Court of Appeal quashed his conviction in July 2023. A 2024 investigation found Greater Manchester Police had withheld crucial evidence.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Andrew Malkinson</strong> &mdash; spent 17 years in prison, refused parole because he would not admit guilt. Maintained innocence throughout.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Peter McFadden</strong>, identified by DNA in 2023, was a serial sex offender who had died in 2021. He had never been a suspect in the original investigation.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Flawed eyewitness identification</li><li>Greater Manchester Police withheld exculpatory evidence</li><li>Parole system punished him for maintaining innocence</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed July 2023 after 17 years. UK government announced compensation review. Police referred to watchdog for investigation.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Andrew_Malkinson" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1997" data-category="Rape / Murder" data-search="norfolk four united states 1997 rape / murder four us navy sailors &amp;mdash; danial williams, joseph dick, derek tice, and eric wilson &amp;mdash; were convicted of the 1997 rape and murder of michelle moore-bosko in norfolk, virginia. all four &amp;lsquo;confessed&amp;rsquo; after aggressive police interrogation despite no physical evidence linking them. the real perpetrator, omar ballard, later confessed and his dna matched. he was convicted but the four remained convicted. three received full pardons from virginia governor terry mcauliffe in 2017&amp;ndash;2020. dick had entered a plea that prevented full pardon until 2024. danial williams joseph dick derek tice eric wilson omar ballard &amp;mdash; his dna matched the crime scene, and he confessed to acting alone. he was convicted but the four sailors remained convicted for two more decades." id="norfolk-four">
+        <div class="case-media">
+          <img src="assets/img/norfolk-four.svg" alt="Case illustration: Norfolk Four" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Rape / Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1997</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Pardoned · 2017&ndash;2020</span>
+          </div>
+          <h3>Norfolk Four</h3>
+          <p class="case-blurb">Four US Navy sailors &mdash; Danial Williams, Joseph Dick, Derek Tice, and Eric Wilson &mdash; were convicted of the 1997 rape and murder of Michelle Moore-Bosko in Norfolk, Virginia. All four &lsquo;confessed&rsquo; after aggressive police interrogation despite no physical evidence linking them. The real perpetrator, Omar Ballard, later confessed and his DNA matched. He was convicted but the four remained convicted. Three received full pardons from Virginia Governor Terry McAuliffe in 2017&ndash;2020. Dick had entered a plea that prevented full pardon until 2024.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Danial Williams</li><li>Joseph Dick</li><li>Derek Tice</li><li>Eric Wilson</li></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Omar Ballard</strong> &mdash; his DNA matched the crime scene, and he confessed to acting alone. He was convicted but the four sailors remained convicted for two more decades.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Reid-technique police interrogations producing false confessions</li><li>Prosecutors continued to pursue the four even after Ballard&rsquo;s DNA match</li><li>Navy pressure on the sailors to cooperate with civilian investigators</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Three pardoned in 2017 by Governor McAuliffe. Final pardon for Dick in 2024. The case is cited in false-confession research worldwide.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Norfolk_Four" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1982" data-category="Rape" data-search="marvin anderson united states 1982 rape marvin anderson, an 18-year-old black man in hanover county, virginia, was convicted in 1982 of the rape of a young white woman. the victim identified him from a photo array assembled by an officer who already suspected him. no physical evidence. sentenced to 210 years. after 15 years in prison and 4 on parole, dna testing in 2001 excluded him and matched the actual perpetrator, john ashley otis lincoln. anderson was the first virginia inmate exonerated by dna under the 2001 post-conviction dna statute. marvin anderson &amp;mdash; convicted at 18; spent 15 years in prison and 4 more on sex-offender registry before exoneration. john ashley otis lincoln &amp;mdash; identified by dna in 2001. he had been a suspect in the original investigation but had been cleared on flawed grounds." id="marvin-anderson">
+        <div class="case-media">
+          <img src="assets/img/marvin-anderson.svg" alt="Case illustration: Marvin Anderson" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Rape</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1982</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated by DNA · 2001</span>
+          </div>
+          <h3>Marvin Anderson</h3>
+          <p class="case-blurb">Marvin Anderson, an 18-year-old Black man in Hanover County, Virginia, was convicted in 1982 of the rape of a young white woman. The victim identified him from a photo array assembled by an officer who already suspected him. No physical evidence. Sentenced to 210 years. After 15 years in prison and 4 on parole, DNA testing in 2001 excluded him and matched the actual perpetrator, John Ashley Otis Lincoln. Anderson was the first Virginia inmate exonerated by DNA under the 2001 post-conviction DNA statute.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Marvin Anderson</strong> &mdash; convicted at 18; spent 15 years in prison and 4 more on sex-offender registry before exoneration.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>John Ashley Otis Lincoln</strong> &mdash; identified by DNA in 2001. He had been a suspect in the original investigation but had been cleared on flawed grounds.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Cross-racial eyewitness misidentification</li><li>Confirmation bias by the investigating officer</li><li>All-white jury in 1982 rural Virginia</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Exonerated by DNA in 2001. Received a governor&rsquo;s pardon in 2002 and $1.2 million state compensation. Works today as a truck driver and Innocence Project advocate.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Marvin_Anderson" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="2002" data-category="Murder" data-search="kirstin blaise lobato united states 2002 murder kirstin lobato, an 18-year-old in las vegas, was convicted in 2002 of the 2001 murder and sexual mutilation of a homeless man, despite being 150 miles away at the time. convicted on the basis of her own statements about defending herself against a separate attempted rape (statements that were twisted into a &amp;lsquo;confession&amp;rsquo;). sentenced to 13&amp;ndash;35 years. after 16 years, the nevada supreme court overturned her conviction in 2017, citing ineffective counsel and actual-innocence evidence including a time-stamped receipt proving she was elsewhere. kirstin blaise lobato &amp;mdash; was 18 at the time of arrest; spent 16 years in nevada prison before exoneration. the actual perpetrator was never identified. the case against lobato rested entirely on misinterpreted statements she made about a separate incident. no physical evidence linked her." id="kirstin-lobato">
+        <div class="case-media">
+          <img src="assets/img/kirstin-lobato.svg" alt="Case illustration: Kirstin Blaise Lobato" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2002</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated · 2017</span>
+          </div>
+          <h3>Kirstin Blaise Lobato</h3>
+          <p class="case-blurb">Kirstin Lobato, an 18-year-old in Las Vegas, was convicted in 2002 of the 2001 murder and sexual mutilation of a homeless man, despite being 150 miles away at the time. Convicted on the basis of her own statements about defending herself against a separate attempted rape (statements that were twisted into a &lsquo;confession&rsquo;). Sentenced to 13&ndash;35 years. After 16 years, the Nevada Supreme Court overturned her conviction in 2017, citing ineffective counsel and actual-innocence evidence including a time-stamped receipt proving she was elsewhere.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Kirstin Blaise Lobato</strong> &mdash; was 18 at the time of arrest; spent 16 years in Nevada prison before exoneration.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual perpetrator was never identified. The case against Lobato rested entirely on misinterpreted statements she made about a separate incident. No physical evidence linked her.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Police mischaracterization of her statements as a &lsquo;confession&rsquo;</li><li>Ineffective trial counsel</li><li>Time-stamped receipt proving her alibi was not investigated</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned in 2017. Lobato released in December 2017 after 16 years. Received a certificate of innocence from the court.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Kirstin_Blaise_Lobato" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1985" data-category="Rape / Murder" data-search="beatrice six united states 1985 rape / murder helen wilson, 68, was raped and murdered in beatrice, nebraska in 1985. six people &amp;mdash; joseph white, ada joann taylor, debra shelden, kathy gonzalez, james dean, and thomas winslow &amp;mdash; were convicted. five had &amp;lsquo;confessed&amp;rsquo; and pled guilty; white went to trial and was convicted. all six were innocent. dna testing in 2009 matched a different man (bruce allen smith, deceased). the six collectively served over 75 years in prison. the case is one of the worst mass false-confession cases in us history. joseph white ada joann taylor debra shelden kathy gonzalez james dean thomas winslow bruce allen smith &amp;mdash; his dna matched the crime scene. he had been a suspect in 1985 but had been cleared on flawed serology. he died in 1992." id="beatrice-six">
+        <div class="case-media">
+          <img src="assets/img/beatrice-six.svg" alt="Case illustration: Beatrice Six" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Rape / Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1985</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated by DNA · 2009</span>
+          </div>
+          <h3>Beatrice Six</h3>
+          <p class="case-blurb">Helen Wilson, 68, was raped and murdered in Beatrice, Nebraska in 1985. Six people &mdash; Joseph White, Ada JoAnn Taylor, Debra Shelden, Kathy Gonzalez, James Dean, and Thomas Winslow &mdash; were convicted. Five had &lsquo;confessed&rsquo; and pled guilty; White went to trial and was convicted. All six were innocent. DNA testing in 2009 matched a different man (Bruce Allen Smith, deceased). The six collectively served over 75 years in prison. The case is one of the worst mass false-confession cases in US history.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Joseph White</li><li>Ada JoAnn Taylor</li><li>Debra Shelden</li><li>Kathy Gonzalez</li><li>James Dean</li><li>Thomas Winslow</li></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Bruce Allen Smith</strong> &mdash; his DNA matched the crime scene. He had been a suspect in 1985 but had been cleared on flawed serology. He died in 1992.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Reid-technque interrogation producing false confessions from five of the six</li><li>Gossip and rumor treated as evidence in a small town</li><li>Prosecutorial reliance on the &lsquo;confessions&rsquo; even after they were contradicted by physical evidence</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> All six exonerated by DNA in 2009. The State of Nebraska paid $28 million in settlements. The case is studied as a textbook mass false-confession case.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Beatrice_Six" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1978" data-category="Murder" data-search="craig coley united states 1978 murder craig coley, a 31-year-old vietnam veteran, was convicted in 1980 of the 1978 double-murder of his ex-girlfriend rhonda wicht and her 4-year-old son donald in simi valley, california. convicted on circumstantial evidence and flawed forensics. sentenced to life without parole. after 39 years in prison, dna testing in 2017 excluded him and matched an unknown male. simi valley police had preserved evidence that the original investigators had ignored. governor jerry brown pardoned him in 2017. craig coley &amp;mdash; spent 39 years in prison for the murder of his ex-girlfriend and her young son. was 70 when released. the actual perpetrator has not been identified. dna from the crime scene matched an unknown male in 2017, fully excluding coley." id="craig-coley">
+        <div class="case-media">
+          <img src="assets/img/craig-coley.svg" alt="Case illustration: Craig Coley" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1978</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated by DNA · 2017</span>
+          </div>
+          <h3>Craig Coley</h3>
+          <p class="case-blurb">Craig Coley, a 31-year-old Vietnam veteran, was convicted in 1980 of the 1978 double-murder of his ex-girlfriend Rhonda Wicht and her 4-year-old son Donald in Simi Valley, California. Convicted on circumstantial evidence and flawed forensics. Sentenced to life without parole. After 39 years in prison, DNA testing in 2017 excluded him and matched an unknown male. Simi Valley police had preserved evidence that the original investigators had ignored. Governor Jerry Brown pardoned him in 2017.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Craig Coley</strong> &mdash; spent 39 years in prison for the murder of his ex-girlfriend and her young son. Was 70 when released.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual perpetrator has not been identified. DNA from the crime scene matched an unknown male in 2017, fully excluding Coley.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Flawed serology evidence presented as definitive</li><li>Investigator tunnel vision after a high-profile double murder</li><li>Suppressed evidence pointing to other suspects</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Pardoned by Governor Brown in 2017. Received $21 million from the City of Simi Valley in 2019 &mdash; among the largest wrongful-conviction settlements in US history.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Craig_Coley" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1986" data-category="Murder" data-search="michael morton united states 1986 murder michael morton was convicted in 1987 of beating his wife christine to death in their williamson county, texas home in 1986. sentenced to life. the prosecution had withheld crucial evidence: a neighbor had seen a man casing the house; christine&amp;rsquo;s credit card was used by another man days after the murder; morton&amp;rsquo;s 3-year-old son had witnessed the attack and named a different man. after 25 years, dna testing of a bandana found near the scene matched mark alan norwood, who was convicted in 2013. the original prosecutor, ken anderson, was jailed for contempt. michael morton &amp;mdash; spent nearly 25 years in prison for the murder of his wife. his 3-year-old son eric was present during the murder. mark alan norwood &amp;mdash; a serial burglar whose dna matched the bandana. he was convicted of christine&amp;rsquo;s murder in 2013 and is a suspect in other murders." id="michael-morton">
+        <div class="case-media">
+          <img src="assets/img/michael-morton.svg" alt="Case illustration: Michael Morton" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1986</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated by DNA · 2011</span>
+          </div>
+          <h3>Michael Morton</h3>
+          <p class="case-blurb">Michael Morton was convicted in 1987 of beating his wife Christine to death in their Williamson County, Texas home in 1986. Sentenced to life. The prosecution had withheld crucial evidence: a neighbor had seen a man casing the house; Christine&rsquo;s credit card was used by another man days after the murder; Morton&rsquo;s 3-year-old son had witnessed the attack and named a different man. After 25 years, DNA testing of a bandana found near the scene matched Mark Alan Norwood, who was convicted in 2013. The original prosecutor, Ken Anderson, was jailed for contempt.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Michael Morton</strong> &mdash; spent nearly 25 years in prison for the murder of his wife. His 3-year-old son Eric was present during the murder.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Mark Alan Norwood</strong> &mdash; a serial burglar whose DNA matched the bandana. He was convicted of Christine&rsquo;s murder in 2013 and is a suspect in other murders.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Prosecutorial misconduct by DA Ken Anderson (later jailed for contempt)</li><li>Withheld evidence including the son&rsquo;s witness statement</li><li>Sensational &lsquo;husband did it&rsquo; narrative</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Exonerated by DNA in 2011. Norwood convicted in 2013. Anderson became the first US prosecutor jailed for withholding evidence. Michael Morton Act (2013) reformed Texas discovery rules.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Michael_Morton_(wrongful_conviction)" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="FR" data-year="2001" data-category="Child sexual abuse (mass false)" data-search="the outreau trial france 2001 child sexual abuse (mass false) between 2001 and 2005, 17 adults in outreau, northern france, were prosecuted on allegations of operating a child-sex-abuse ring. the allegations came largely from a single complainant and her children, supported by an over-eager investigating magistrate. four children were taken into state care. by the end of the trial in 2005, 13 of the 17 were acquitted; six of those acquitted had spent up to three years in pre-trial detention. one defendant, dominique wiel, committed suicide during the investigation. the case is france&amp;rsquo;s most notorious modern mass false-accusation scandal. 17 people, including a priest (father dominique wiel, who died by suicide), a bailiff, taxi drivers, and parents. 13 were acquitted at trial; six had served years in pre-trial detention. the principal complainant and her children made allegations that were later shown to be unreliable and in some cases fabricated. the investigating magistrate, fabrice burgaud, was later disciplined for misconduct." id="outreau-trial">
+        <div class="case-media">
+          <img src="assets/img/outreau-trial.svg" alt="Case illustration: The Outreau Trial" loading="lazy">
+          <div class="case-flag">&#127467;&#127479;</div>
+          <div class="case-cat">Child sexual abuse (mass false)</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2001</span>
+            <span class="country">&#127467;&#127479; France</span>
+            <span class="badge warn">13 of 17 acquitted · 2005</span>
+          </div>
+          <h3>The Outreau Trial</h3>
+          <p class="case-blurb">Between 2001 and 2005, 17 adults in Outreau, northern France, were prosecuted on allegations of operating a child-sex-abuse ring. The allegations came largely from a single complainant and her children, supported by an over-eager investigating magistrate. Four children were taken into state care. By the end of the trial in 2005, 13 of the 17 were acquitted; six of those acquitted had spent up to three years in pre-trial detention. One defendant, Dominique Wiel, committed suicide during the investigation. The case is France&rsquo;s most notorious modern mass false-accusation scandal.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul>17 people, including a priest (Father Dominique Wiel, who died by suicide), a bailiff, taxi drivers, and parents. 13 were acquitted at trial; six had served years in pre-trial detention.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The principal complainant and her children made allegations that were later shown to be unreliable and in some cases fabricated. The investigating magistrate, Fabrice Burgaud, was later disciplined for misconduct.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Investigating magistrate treated uncorroborated allegations as fact</li><li>Children taken into care, pressuring the accused to confess</li><li>Media pre-judgment of a &lsquo;pedophile ring&rsquo;</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> 13 of 17 acquitted in 2005. The case led to major French legal reforms in 2007 (reforming investigating magistrates and pre-trial detention). Burgaud was disciplined but cleared of misconduct.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Outreau_trial" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1994" data-category="Child sexual abuse (mass false)" data-search="wenatchee child sex ring united states 1994 child sexual abuse (mass false) in 1994&amp;ndash;1995, wenatchee, washington police arrested 43 adults on allegations of operating a multi-generation child-sex-abuse ring. 28,000 police contacts. five children placed in care. the investigation was led by detective bob perez, who had himself fostered two of the children whose allegations drove the case. 18 convictions were obtained, all later overturned on appeal. the city of wenatchee paid over $100 million in civil settlements. the case is one of the worst mass false-accusation cases in us history. 43 adults were arrested. 18 were convicted. all 18 convictions were eventually overturned. pastors, teachers, parents, and migrant workers were among the accused. a small group of foster children, interviewed by detective perez (their own foster parent) using techniques later discredited as suggestive and coercive. no physical evidence ever supported any allegation." id="wenatchee-ring">
+        <div class="case-media">
+          <img src="assets/img/wenatchee-ring.svg" alt="Case illustration: Wenatchee Child Sex Ring" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Child sexual abuse (mass false)</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1994</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge warn">All convictions overturned · 2000s</span>
+          </div>
+          <h3>Wenatchee Child Sex Ring</h3>
+          <p class="case-blurb">In 1994&ndash;1995, Wenatchee, Washington police arrested 43 adults on allegations of operating a multi-generation child-sex-abuse ring. 28,000 police contacts. Five children placed in care. The investigation was led by detective Bob Perez, who had himself fostered two of the children whose allegations drove the case. 18 convictions were obtained, all later overturned on appeal. The City of Wenatchee paid over $100 million in civil settlements. The case is one of the worst mass false-accusation cases in US history.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul>43 adults were arrested. 18 were convicted. All 18 convictions were eventually overturned. Pastors, teachers, parents, and migrant workers were among the accused.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>A small group of foster children, interviewed by detective Perez (their own foster parent) using techniques later discredited as suggestive and coercive. No physical evidence ever supported any allegation.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Detective Bob Perez was both investigator and foster parent of the principal complainants (massive conflict of interest)</li><li>Suggestive and coercive child-interview techniques later discredited</li><li>Satanic-panic atmosphere of the 1990s</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> All 18 convictions overturned on appeal between 1995 and 2000. $100M+ in civil settlements. The case is studied alongside the McMartin Preschool case as a Satanic-panic textbook example.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Wenatchee_child_abuse_prosecutions" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1999" data-category="Murder (cot death)" data-search="sally clark united kingdom 1999 murder (cot death) sally clark, a british solicitor, was convicted in 1999 of murdering her two infant sons (who died in 1996 and 1998 at 11 and 8 weeks old). the prosecution relied on pediatrician professor roy meadow&amp;rsquo;s now-discredited &amp;lsquo;meadow&amp;rsquo;s law&amp;rsquo;: &amp;lsquo;one sudden infant death is tragedy, two is suspicious, three is murder&amp;rsquo;. meadow told the jury the chance of two cot deaths in one family was 1 in 73 million (statistically wrong). conviction quashed in 2003. sally clark died of alcohol poisoning in 2007, never recovering from the ordeal. sally clark &amp;mdash; a solicitor and mother who lost two babies to natural causes, then was prosecuted for murdering them. she spent 3 years in prison and died 4 years after release. no actual perpetrator. the deaths were natural sudden infant death syndrome (sids). roy meadow&amp;rsquo;s statistical testimony was later discredited by the royal statistical society." id="sally-clark">
+        <div class="case-media">
+          <img src="assets/img/sally-clark.svg" alt="Case illustration: Sally Clark" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Murder (cot death)</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1999</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Conviction quashed · 2003</span>
+          </div>
+          <h3>Sally Clark</h3>
+          <p class="case-blurb">Sally Clark, a British solicitor, was convicted in 1999 of murdering her two infant sons (who died in 1996 and 1998 at 11 and 8 weeks old). The prosecution relied on pediatrician Professor Roy Meadow&rsquo;s now-discredited &lsquo;Meadow&rsquo;s Law&rsquo;: &lsquo;one sudden infant death is tragedy, two is suspicious, three is murder&rsquo;. Meadow told the jury the chance of two cot deaths in one family was 1 in 73 million (statistically wrong). Conviction quashed in 2003. Sally Clark died of alcohol poisoning in 2007, never recovering from the ordeal.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Sally Clark</strong> &mdash; a solicitor and mother who lost two babies to natural causes, then was prosecuted for murdering them. She spent 3 years in prison and died 4 years after release.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No actual perpetrator. The deaths were natural sudden infant death syndrome (SIDS). Roy Meadow&rsquo;s statistical testimony was later discredited by the Royal Statistical Society.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Roy Meadow&rsquo;s flawed statistical testimony (1 in 73 million)</li><li>Meadow&rsquo;s Law presented as scientific when it was speculation</li><li>Failure to disclose microbiology evidence suggesting natural infection</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 2003. Sally Clark died in 2007. Meadow was struck off by the General Medical Council in 2005. The case transformed UK expert-testimony rules.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Sally_Clark" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="2002" data-category="Murder (cot death)" data-search="angela cannings united kingdom 2002 murder (cot death) angela cannings was convicted in 2002 of murdering her two infant sons (who died in 1991 and 1999). her first daughter had also died in 1989; the prosecution used all three deaths. convicted on roy meadow&amp;rsquo;s &amp;lsquo;meadow&amp;rsquo;s law&amp;rsquo; testimony &amp;mdash; the same flawed reasoning that convicted sally clark. sentenced to life. conviction quashed in 2003 after the sally clark appeal. cannings had a family history of sids (genetic). her case led the uk attorney general to order a review of all 258 similar convictions. angela cannings &amp;mdash; lost three children to natural causes, then was convicted of murdering two of them. spent 19 months in prison. no actual perpetrator. the deaths were natural sids. cannings&amp;rsquo;s family had a genetic history of sids, evidence that was not presented at trial." id="angela-cannings">
+        <div class="case-media">
+          <img src="assets/img/angela-cannings.svg" alt="Case illustration: Angela Cannings" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Murder (cot death)</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2002</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Conviction quashed · 2003</span>
+          </div>
+          <h3>Angela Cannings</h3>
+          <p class="case-blurb">Angela Cannings was convicted in 2002 of murdering her two infant sons (who died in 1991 and 1999). Her first daughter had also died in 1989; the prosecution used all three deaths. Convicted on Roy Meadow&rsquo;s &lsquo;Meadow&rsquo;s Law&rsquo; testimony &mdash; the same flawed reasoning that convicted Sally Clark. Sentenced to life. Conviction quashed in 2003 after the Sally Clark appeal. Cannings had a family history of SIDS (genetic). Her case led the UK Attorney General to order a review of all 258 similar convictions.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Angela Cannings</strong> &mdash; lost three children to natural causes, then was convicted of murdering two of them. Spent 19 months in prison.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No actual perpetrator. The deaths were natural SIDS. Cannings&rsquo;s family had a genetic history of SIDS, evidence that was not presented at trial.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Roy Meadow&rsquo;s &lsquo;Meadow&rsquo;s Law&rsquo; testimony</li><li>Failure to investigate family history of SIDS</li><li>Confirmation bias after Sally Clark conviction</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 2003. The case triggered review of 258 UK cot-death convictions and led to new rules on expert testimony. Cannings received compensation.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Angela_Cannings" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="2001" data-category="Murder" data-search="ryan ferguson united states 2001 murder ryan ferguson, 17, was convicted in 2005 of the 2001 murder of columbia, missouri sports editor kent heitholt. the conviction rested entirely on the testimony of his friend chuck erickson, who had &amp;lsquo;recovered&amp;rsquo; repressed memories of the murder after reading about it &amp;mdash; and whose story changed repeatedly. no physical evidence linked ferguson. after 10 years in prison, the conviction was overturned in 2013 when erickson and the sole eyewitness recanted their testimony. ferguson was released in 2013. ryan ferguson &amp;mdash; was 17 at the time of arrest, 21 at conviction. spent nearly 10 years in prison. no actual perpetrator was identified. the original &amp;lsquo;witness&amp;rsquo; (chuck erickson) had false repressed memories and later recanted. the actual killer was never found." id="ryan-ferguson">
+        <div class="case-media">
+          <img src="assets/img/ryan-ferguson.svg" alt="Case illustration: Ryan Ferguson" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2001</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Conviction overturned · 2013</span>
+          </div>
+          <h3>Ryan Ferguson</h3>
+          <p class="case-blurb">Ryan Ferguson, 17, was convicted in 2005 of the 2001 murder of Columbia, Missouri sports editor Kent Heitholt. The conviction rested entirely on the testimony of his friend Chuck Erickson, who had &lsquo;recovered&rsquo; repressed memories of the murder after reading about it &mdash; and whose story changed repeatedly. No physical evidence linked Ferguson. After 10 years in prison, the conviction was overturned in 2013 when Erickson and the sole eyewitness recanted their testimony. Ferguson was released in 2013.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Ryan Ferguson</strong> &mdash; was 17 at the time of arrest, 21 at conviction. Spent nearly 10 years in prison.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No actual perpetrator was identified. The original &lsquo;witness&rsquo; (Chuck Erickson) had false repressed memories and later recanted. The actual killer was never found.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Repressed-memory testimony (later discredited)</li><li>Chuck Erickson&rsquo;s false confession under pressure</li><li>Erickson received a reduced sentence in exchange for testimony</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned November 2013. Ferguson released after 10 years. Received $11 million in civil settlements. Became a wrongful-conviction advocate and podcast host.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Ryan_Ferguson" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1977" data-category="Murder" data-search="dewey bozella united states 1977 murder dewey bozella was convicted in 1983 of the 1977 murder of 92-year-old emma crapser in poughkeepsie, new york. the case rested on the testimony of witnesses with severe credibility problems (including two criminals given deals for their testimony). bozella refused to admit guilt and was denied parole five times. after 32 years in prison, the innocence project uncovered suppressed evidence pointing to another suspect. conviction overturned in 2009. bozella became a professional boxer at age 52, fighting one bout in 2011. dewey bozella &amp;mdash; spent 32 years in prison. refused parole five times because he would not admit guilt. was 18 at the time of the crime, 50 at release. the actual perpetrator was identified in 2009 as donald wise (who had been convicted of similar murders). original investigators had concealed evidence pointing to wise." id="dewey-bozella">
+        <div class="case-media">
+          <img src="assets/img/dewey-bozella.svg" alt="Case illustration: Dewey Bozella" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1977</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated · 2009</span>
+          </div>
+          <h3>Dewey Bozella</h3>
+          <p class="case-blurb">Dewey Bozella was convicted in 1983 of the 1977 murder of 92-year-old Emma Crapser in Poughkeepsie, New York. The case rested on the testimony of witnesses with severe credibility problems (including two criminals given deals for their testimony). Bozella refused to admit guilt and was denied parole five times. After 32 years in prison, the Innocence Project uncovered suppressed evidence pointing to another suspect. Conviction overturned in 2009. Bozella became a professional boxer at age 52, fighting one bout in 2011.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Dewey Bozella</strong> &mdash; spent 32 years in prison. Refused parole five times because he would not admit guilt. Was 18 at the time of the crime, 50 at release.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual perpetrator was identified in 2009 as Donald Wise (who had been convicted of similar murders). Original investigators had concealed evidence pointing to Wise.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Witness testimony bought with prosecutorial deals</li><li>Suppressed evidence pointing to Donald Wise</li><li>Parole system punished him for maintaining innocence</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned in 2009 after 32 years. Received the Arthur Ashe Courage Award at the 2011 ESPYs. Bozella fought one professional boxing match in 2011, winning by unanimous decision.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Dewey_Bozella" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1971" data-category="Murder" data-search="richard phillips united states 1971 murder richard phillips was convicted in 1972 of a 1971 murder in detroit, on the testimony of a single witness (co-defendant richard palombo, who got a deal). no physical evidence. sentenced to life without parole. after 45 years in prison &amp;mdash; the longest wrongful sentence served in the us at the time &amp;mdash; the conviction was overturned in 2018. the university of michigan innocence clinic took his case after he wrote to them from prison. phillips was 71 when released. richard phillips &amp;mdash; spent 45 years in prison, the longest wrongful sentence served in the us at the time of his release. was 26 at arrest, 71 at release. richard palombo, the co-defendant who got a deal to testify against phillips. palombo later admitted he had lied. no physical evidence ever linked phillips." id="richard-phillips">
+        <div class="case-media">
+          <img src="assets/img/richard-phillips.svg" alt="Case illustration: Richard Phillips" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1971</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated · 2018</span>
+          </div>
+          <h3>Richard Phillips</h3>
+          <p class="case-blurb">Richard Phillips was convicted in 1972 of a 1971 murder in Detroit, on the testimony of a single witness (co-defendant Richard Palombo, who got a deal). No physical evidence. Sentenced to life without parole. After 45 years in prison &mdash; the longest wrongful sentence served in the US at the time &mdash; the conviction was overturned in 2018. The University of Michigan Innocence Clinic took his case after he wrote to them from prison. Phillips was 71 when released.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Richard Phillips</strong> &mdash; spent 45 years in prison, the longest wrongful sentence served in the US at the time of his release. Was 26 at arrest, 71 at release.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>Richard Palombo, the co-defendant who got a deal to testify against Phillips. Palombo later admitted he had lied. No physical evidence ever linked Phillips.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Single witness testimony bought with a prosecutorial deal</li><li>No physical evidence</li><li>Decades of failed appeals before the University of Michigan Innocence Clinic took the case</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned in 2018. Charges dropped in 2019. Michigan awarded $2.5M compensation; federal lawsuit pending. Phillips paints watercolors and speaks about his case.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Richard_Phillips_(wrongful_conviction)" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1993" data-category="Murder" data-search="west memphis three united states 1993 murder three teenagers &amp;mdash; damien echols, jason baldwin, and jessie misskelley &amp;mdash; were convicted in 1994 of the 1993 murders of three 8-year-old boys in west memphis, arkansas. the case rested on misskelley&amp;rsquo;s coerced false confession (he is intellectually disabled), &amp;lsquo;satanic panic&amp;rsquo; hysteria, and the teenagers&amp;rsquo; goth appearance. echols was sentenced to death. after 18 years, new dna evidence pointed to another suspect (terry hobbs, stepfather of one victim). in 2011 the three entered alford pleas (maintaining innocence while acknowledging prosecutors had enough to convict) and were released for time served. damien echols (sentenced to death) jason baldwin (sentenced to life) jessie misskelley (sentenced to life plus 20 years) dna evidence in 2007 pointed to terry hobbs, stepfather of victim stevie branch, but he has never been charged. the original case rested on misskelley&amp;rsquo;s coerced, false confession." id="west-memphis-three">
+        <div class="case-media">
+          <img src="assets/img/west-memphis-three.svg" alt="Case illustration: West Memphis Three" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1993</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge warn">Freed via Alford plea · 2011</span>
+          </div>
+          <h3>West Memphis Three</h3>
+          <p class="case-blurb">Three teenagers &mdash; Damien Echols, Jason Baldwin, and Jessie Misskelley &mdash; were convicted in 1994 of the 1993 murders of three 8-year-old boys in West Memphis, Arkansas. The case rested on Misskelley&rsquo;s coerced false confession (he is intellectually disabled), &lsquo;Satanic panic&rsquo; hysteria, and the teenagers&rsquo; goth appearance. Echols was sentenced to death. After 18 years, new DNA evidence pointed to another suspect (Terry Hobbs, stepfather of one victim). In 2011 the three entered Alford pleas (maintaining innocence while acknowledging prosecutors had enough to convict) and were released for time served.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Damien Echols (sentenced to death)</li><li>Jason Baldwin (sentenced to life)</li><li>Jessie Misskelley (sentenced to life plus 20 years)</li></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>DNA evidence in 2007 pointed to <strong>Terry Hobbs</strong>, stepfather of victim Stevie Branch, but he has never been charged. The original case rested on Misskelley&rsquo;s coerced, false confession.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>1990s &lsquo;Satanic panic&rsquo; hysteria</li><li>Coerced confession from intellectually disabled Misskelley</li><li>Media pre-judgment based on the teenagers&rsquo; appearance and music tastes</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Released in 2011 after 18 years via Alford pleas. Echols published a memoir. The case remains controversial: no full exoneration, no new prosecution, $18M settlement documentary.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/West_Memphis_Three" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1966" data-category="Murder" data-search="rubin &amp;lsquo;hurricane&amp;rsquo; carter united states 1966 murder rubin &amp;lsquo;hurricane&amp;rsquo; carter, a top middleweight boxing contender, and john artis were convicted in 1967 of a 1966 triple-murder at the lafayette bar &amp; grill in paterson, nj. the case rested on two witnesses (both of whom were criminals and later recanted) and racial bias. carter was sentenced to three life terms. after 19 years in prison, federal judge h. lee sarokin overturned the convictions in 1985, finding prosecutors had committed &amp;lsquo;grave constitutional violations&amp;rsquo;. bob dylan&amp;rsquo;s &amp;lsquo;hurricane&amp;rsquo; and a 1999 denzel washington film told his story. rubin &amp;lsquo;hurricane&amp;rsquo; carter and john artis &amp;mdash; carter was a contender for the world middleweight title at the time of arrest. spent 19 years in prison. the actual perpetrators were never identified. the two witnesses whose testimony convicted carter and artis were themselves burglars seeking leniency, and both later recanted." id="hurricane-carter">
+        <div class="case-media">
+          <img src="assets/img/hurricane-carter.svg" alt="Case illustration: Rubin &amp;lsquo;Hurricane&amp;rsquo; Carter" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1966</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Convictions overturned · 1985</span>
+          </div>
+          <h3>Rubin &lsquo;Hurricane&rsquo; Carter</h3>
+          <p class="case-blurb">Rubin &lsquo;Hurricane&rsquo; Carter, a top middleweight boxing contender, and John Artis were convicted in 1967 of a 1966 triple-murder at the Lafayette Bar & Grill in Paterson, NJ. The case rested on two witnesses (both of whom were criminals and later recanted) and racial bias. Carter was sentenced to three life terms. After 19 years in prison, federal judge H. Lee Sarokin overturned the convictions in 1985, finding prosecutors had committed &lsquo;grave constitutional violations&rsquo;. Bob Dylan&rsquo;s &lsquo;Hurricane&rsquo; and a 1999 Denzel Washington film told his story.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Rubin &lsquo;Hurricane&rsquo; Carter</strong> and <strong>John Artis</strong> &mdash; Carter was a contender for the world middleweight title at the time of arrest. Spent 19 years in prison.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual perpetrators were never identified. The two witnesses whose testimony convicted Carter and Artis were themselves burglars seeking leniency, and both later recanted.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Racial bias in 1960s New Jersey</li><li>Witness testimony bought with prosecutorial deals</li><li>Media pre-judgment in a high-profile case</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Convictions overturned by federal judge in 1985 after 19 years. Carter became an advocate for the wrongfully convicted in Canada until his death in 2014.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Rubin_Carter" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1967" data-category="Murder" data-search="james richardson united states 1967 murder james richardson, a black migrant worker in arcadia, florida, was convicted in 1968 of poisoning his seven children with parathion in 1967. the prosecution suggested he killed them for life-insurance money (there was no policy). convicted on the testimony of a neighbor (betsy reese, who was later suspected of the crime) and a mentally disabled cellmate who said richardson confessed. sentenced to death. after 21 years, the conviction was overturned in 1989. richardson had been on death row three times facing execution dates. james richardson &amp;mdash; spent 21 years in prison (much on death row) for the murder of his seven children. was 31 at arrest, 52 at release. betsy reese, the neighbor who reported the deaths and testified against richardson, was later suspected of the crime. reese had a violent history and was the last person with the children." id="james-richardson">
+        <div class="case-media">
+          <img src="assets/img/james-richardson.svg" alt="Case illustration: James Richardson" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1967</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Conviction overturned · 1989</span>
+          </div>
+          <h3>James Richardson</h3>
+          <p class="case-blurb">James Richardson, a Black migrant worker in Arcadia, Florida, was convicted in 1968 of poisoning his seven children with parathion in 1967. The prosecution suggested he killed them for life-insurance money (there was no policy). Convicted on the testimony of a neighbor (Betsy Reese, who was later suspected of the crime) and a mentally disabled cellmate who said Richardson confessed. Sentenced to death. After 21 years, the conviction was overturned in 1989. Richardson had been on death row three times facing execution dates.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>James Richardson</strong> &mdash; spent 21 years in prison (much on death row) for the murder of his seven children. Was 31 at arrest, 52 at release.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>Betsy Reese, the neighbor who reported the deaths and testified against Richardson, was later suspected of the crime. Reese had a violent history and was the last person with the children.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Racial bias in 1960s Florida</li><li>False testimony from a mentally disabled cellmate (bought with prosecutorial favors)</li><li>Media narrative of an &lsquo;insurance murder&rsquo; when no policy existed</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned in 1989. Charges dropped in 1990. Received $1M+ settlement. Richardson lived with his surviving family in Massachusetts until his death in 2015.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/James_Richardson_(wrongful_conviction)" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1974" data-category="Terrorism" data-search="maguire seven united kingdom 1974 terrorism seven members of the maguire family &amp;mdash; including 13-year-old patrick and 64-year-old giuseppe (who died in prison) &amp;mdash; were convicted in 1976 of possessing explosives. they were arrested after the guildford bombings. the conviction rested on the griess test, which produced false positives because they had been handling playing cards (which contain nitroglycerin traces). convictions quashed in 1991. the case is closely tied to the guildford four (giuseppe maguire was gerry conlon&amp;rsquo;s father). annie maguire patrick maguire (age 13) sean maguire michael maguire vincent maguire giuseppe conlon patrick o&amp;rsquo;neill no actual terrorist was convicted. the griess test, later shown to be unreliable, was the sole &amp;lsquo;evidence&amp;rsquo;. giuseppe conlon died in prison in 1980." id="maguire-seven">
+        <div class="case-media">
+          <img src="assets/img/maguire-seven.svg" alt="Case illustration: Maguire Seven" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Terrorism</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1974</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Convictions quashed · 1991</span>
+          </div>
+          <h3>Maguire Seven</h3>
+          <p class="case-blurb">Seven members of the Maguire family &mdash; including 13-year-old Patrick and 64-year-old Giuseppe (who died in prison) &mdash; were convicted in 1976 of possessing explosives. They were arrested after the Guildford bombings. The conviction rested on the Griess test, which produced false positives because they had been handling playing cards (which contain nitroglycerin traces). Convictions quashed in 1991. The case is closely tied to the Guildford Four (Giuseppe Maguire was Gerry Conlon&rsquo;s father).</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Annie Maguire</li><li>Patrick Maguire (age 13)</li><li>Sean Maguire</li><li>Michael Maguire</li><li>Vincent Maguire</li><li>Giuseppe Conlon</li><li>Patrick O&rsquo;Neill</li></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No actual terrorist was convicted. The Griess test, later shown to be unreliable, was the sole &lsquo;evidence&rsquo;. Giuseppe Conlon died in prison in 1980.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Anti-Irish sentiment in 1970s Britain</li><li>Discredited forensic test (Griess) presented as definitive</li><li>Pressure to convict after the Guildford bombings</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Convictions quashed in 1991. Compensation paid. The case, with the Guildford Four and Birmingham Six, forced major UK criminal-justice reforms in the 1990s.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Maguire_Seven" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1973" data-category="Terrorism / Murder" data-search="judith ward united kingdom 1973 terrorism / murder judith ward was convicted in 1974 of the 1973 m62 coach bombing that killed 12 (including 9 soldiers) and injured 38. ward, an ira sympathizer with mental-health issues, &amp;lsquo;confessed&amp;rsquo; after sustained interrogation. convicted on her confession and discredited forensic evidence. after 18 years in prison, the conviction was quashed in 1992, with the court of appeal ruling the conviction was &amp;lsquo;unsafe&amp;rsquo; due to non-disclosure of psychiatric evidence about ward&amp;rsquo;s mental state. judith ward &amp;mdash; spent 18 years in prison. had a documented history of personality disorder and confabulation that was withheld from the defense. the actual bombers were ira members, never identified. ward&amp;rsquo;s &amp;lsquo;confession&amp;rsquo; was the product of her mental-health condition and interrogation pressure." id="judith-ward">
+        <div class="case-media">
+          <img src="assets/img/judith-ward.svg" alt="Case illustration: Judith Ward" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Terrorism / Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1973</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Conviction quashed · 1992</span>
+          </div>
+          <h3>Judith Ward</h3>
+          <p class="case-blurb">Judith Ward was convicted in 1974 of the 1973 M62 coach bombing that killed 12 (including 9 soldiers) and injured 38. Ward, an IRA sympathizer with mental-health issues, &lsquo;confessed&rsquo; after sustained interrogation. Convicted on her confession and discredited forensic evidence. After 18 years in prison, the conviction was quashed in 1992, with the Court of Appeal ruling the conviction was &lsquo;unsafe&rsquo; due to non-disclosure of psychiatric evidence about Ward&rsquo;s mental state.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Judith Ward</strong> &mdash; spent 18 years in prison. Had a documented history of personality disorder and confabulation that was withheld from the defense.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual bombers were IRA members, never identified. Ward&rsquo;s &lsquo;confession&rsquo; was the product of her mental-health condition and interrogation pressure.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Coerced confession from a person with documented mental illness</li><li>Withheld psychiatric evidence</li><li>Public pressure to convict after a mass-casualty bombing</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 1992 after 18 years. The case is one of three major IRA-era UK miscarriages (with Guildford Four and Birmingham Six) that forced 1990s reforms.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Judith_Ward" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1988" data-category="Murder" data-search="cardiff three united kingdom 1988 murder five people &amp;mdash; three convicted (the &amp;lsquo;cardiff three&amp;rsquo;) plus two who turned queen&amp;rsquo;s evidence &amp;mdash; were prosecuted for the 1988 murder of lynette white in cardiff&amp;rsquo;s docklands. three were convicted in 1990 on the basis of coerced confessions and the testimony of the two witnesses (who later recanted). convictions quashed in 1992. the real killer, jeffrey gafoor, was identified by dna in 2003 and convicted. the case exposed systemic problems in south wales police interrogation practices. steven miller tony paris yusef abdullahi jeffrey gafoor &amp;mdash; a security guard whose dna matched the crime scene in 2003, 15 years after the murder. gafoor pleaded guilty and was sentenced to life." id="cardiff-three">
+        <div class="case-media">
+          <img src="assets/img/cardiff-three.svg" alt="Case illustration: Cardiff Three" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1988</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Convictions quashed · 1992</span>
+          </div>
+          <h3>Cardiff Three</h3>
+          <p class="case-blurb">Five people &mdash; three convicted (the &lsquo;Cardiff Three&rsquo;) plus two who turned Queen&rsquo;s Evidence &mdash; were prosecuted for the 1988 murder of Lynette White in Cardiff&rsquo;s docklands. Three were convicted in 1990 on the basis of coerced confessions and the testimony of the two witnesses (who later recanted). Convictions quashed in 1992. The real killer, Jeffrey Gafoor, was identified by DNA in 2003 and convicted. The case exposed systemic problems in South Wales Police interrogation practices.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Steven Miller</li><li>Tony Paris</li><li>Yusef Abdullahi</li></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Jeffrey Gafoor</strong> &mdash; a security guard whose DNA matched the crime scene in 2003, 15 years after the murder. Gafoor pleaded guilty and was sentenced to life.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Coerced confessions (Miller had learning difficulties)</li><li>Witness testimony bought with prosecutorial deals</li><li>Sensational coverage of a &lsquo;Satanic&rsquo; murder</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Convictions quashed in 1992. Real perpetrator convicted in 2003. South Wales Police paid compensation. The case led to reforms in UK police interview recording.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Cardiff_Three" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1970" data-category="Murder" data-search="stephen downing united kingdom 1970 murder stephen downing, 17, a gardener at bakewell cemetery in derbyshire, was convicted in 1970 of murdering wendy sewell, a legal secretary, in the cemetery. downing had learning difficulties. he &amp;lsquo;confessed&amp;rsquo; after hours of interrogation without a solicitor, then immediately retracted. convicted on the confession. after 27 years in prison, the conviction was quashed in 2002 following a long campaign by the local matlock mercury newspaper. the case is one of the longest miscarriages of justice in uk legal history. stephen downing &amp;mdash; spent 27 years in prison, much of it maintaining innocence and being denied parole as a result. was 17 at the time of arrest, 45 at release. the actual perpetrator was never identified. the case against downing rested entirely on his &amp;lsquo;confession&amp;rsquo; given under duress to a person with learning difficulties." id="stephen-downing">
+        <div class="case-media">
+          <img src="assets/img/stephen-downing.svg" alt="Case illustration: Stephen Downing" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1970</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Conviction quashed · 2002</span>
+          </div>
+          <h3>Stephen Downing</h3>
+          <p class="case-blurb">Stephen Downing, 17, a gardener at Bakewell cemetery in Derbyshire, was convicted in 1970 of murdering Wendy Sewell, a legal secretary, in the cemetery. Downing had learning difficulties. He &lsquo;confessed&rsquo; after hours of interrogation without a solicitor, then immediately retracted. Convicted on the confession. After 27 years in prison, the conviction was quashed in 2002 following a long campaign by the local Matlock Mercury newspaper. The case is one of the longest miscarriages of justice in UK legal history.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Stephen Downing</strong> &mdash; spent 27 years in prison, much of it maintaining innocence and being denied parole as a result. Was 17 at the time of arrest, 45 at release.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual perpetrator was never identified. The case against Downing rested entirely on his &lsquo;confession&rsquo; given under duress to a person with learning difficulties.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Coerced confession from a person with learning difficulties</li><li>Interrogation without a solicitor</li><li>Local newspaper (Matlock Mercury) campaign eventually forced the appeal</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 2002. Downing received compensation. The case is the longest UK miscarriage of justice and was made into a TV drama.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Stephen_Downing_case" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1972" data-category="Murder" data-search="andrew evans united kingdom 1972 murder andrew evans, a 17-year-old cadet, was convicted in 1973 of the 1972 murder of 14-year-old judith roberts in tamworth, staffordshire. he &amp;lsquo;confessed&amp;rsquo; after a dream he reported to police (who treated it as a confession). convicted on the basis of this &amp;lsquo;dream confession&amp;rsquo; and his mental-health history. after 25 years in prison, the conviction was quashed in 1997. evans had been diagnosed with personality disorder; his confession was the product of his mental illness and police suggestion. andrew evans &amp;mdash; was 17 at arrest, 42 at release. spent 25 years in prison based on a &amp;lsquo;confession&amp;rsquo; that was a reported dream. the actual perpetrator was never identified. the &amp;lsquo;confession&amp;rsquo; was a reported dream that police treated as fact." id="andrew-evans">
+        <div class="case-media">
+          <img src="assets/img/andrew-evans.svg" alt="Case illustration: Andrew Evans" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1972</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Conviction quashed · 1997</span>
+          </div>
+          <h3>Andrew Evans</h3>
+          <p class="case-blurb">Andrew Evans, a 17-year-old cadet, was convicted in 1973 of the 1972 murder of 14-year-old Judith Roberts in Tamworth, Staffordshire. He &lsquo;confessed&rsquo; after a dream he reported to police (who treated it as a confession). Convicted on the basis of this &lsquo;dream confession&rsquo; and his mental-health history. After 25 years in prison, the conviction was quashed in 1997. Evans had been diagnosed with personality disorder; his confession was the product of his mental illness and police suggestion.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Andrew Evans</strong> &mdash; was 17 at arrest, 42 at release. Spent 25 years in prison based on a &lsquo;confession&rsquo; that was a reported dream.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual perpetrator was never identified. The &lsquo;confession&rsquo; was a reported dream that police treated as fact.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>&lsquo;Confession&rsquo; based on a dream (not an actual statement of memory)</li><li>Mental-health vulnerability exploited by interrogators</li><li>No physical evidence linking Evans</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 1997. Evans received compensation. The case is studied in UK false-confession research.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Murder_of_Judith_Roberts" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="AU" data-year="1994" data-category="Murder" data-search="henry keogh australia 1994 murder henry keogh was convicted in 1995 of the 1994 murder of his fiancée anna jane cheney in their adelaide home. the prosecution alleged he drowned her in the bath for life-insurance money. the conviction rested on forensic pathologist dr colin manock&amp;rsquo;s testimony, later discredited. after 20 years in prison, the south australian court of appeal quashed the conviction in 2013 and ordered a retrial; in 2015 the charges were dropped. keogh became an advocate for forensic-science reform in australia. henry keogh &amp;mdash; an adelaide financial advisor. spent 20 years in prison. maintained innocence throughout. no actual perpetrator was identified. manock&amp;rsquo;s forensic testimony was later discredited; the &amp;lsquo;life insurance motive&amp;rsquo; was also shown to be overstated." id="henry-keogh">
+        <div class="case-media">
+          <img src="assets/img/henry-keogh.svg" alt="Case illustration: Henry Keogh" loading="lazy">
+          <div class="case-flag">&#127462;&#127482;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1994</span>
+            <span class="country">&#127462;&#127482; Australia</span>
+            <span class="badge success">Conviction quashed · 2014</span>
+          </div>
+          <h3>Henry Keogh</h3>
+          <p class="case-blurb">Henry Keogh was convicted in 1995 of the 1994 murder of his fiancée Anna Jane Cheney in their Adelaide home. The prosecution alleged he drowned her in the bath for life-insurance money. The conviction rested on forensic pathologist Dr Colin Manock&rsquo;s testimony, later discredited. After 20 years in prison, the South Australian Court of Appeal quashed the conviction in 2013 and ordered a retrial; in 2015 the charges were dropped. Keogh became an advocate for forensic-science reform in Australia.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Henry Keogh</strong> &mdash; an Adelaide financial advisor. Spent 20 years in prison. Maintained innocence throughout.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No actual perpetrator was identified. Manock&rsquo;s forensic testimony was later discredited; the &lsquo;life insurance motive&rsquo; was also shown to be overstated.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Flawed forensic pathology by Dr Colin Manock (later discredited across multiple cases)</li><li>Overstated &lsquo;life insurance&rsquo; motive</li><li>Sensational coverage of an &lsquo;engagement murder&rsquo;</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 2013. Charges dropped in 2015. Keogh received compensation. The case prompted review of Manock&rsquo;s career casework.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Henry_Keogh" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="AU" data-year="1994" data-category="Murder" data-search="andrew mallard australia 1994 murder andrew mallard was convicted in 1995 of the 1994 murder of pamela lawrence in her perth jewelry shop. the prosecution relied on a coerced confession (mallard had mental-health issues) and on flawed forensics. after 12 years in prison, the high court of australia quashed the conviction in 2005. dna evidence in 2006 identified the real killer as simon rochford, who was already in prison for another murder. rochford confessed and then killed himself. mallard received a$3.25m compensation. andrew mallard &amp;mdash; had bipolar disorder; his confession was the product of his mental illness and interrogation pressure. spent 12 years in prison. simon rochford &amp;mdash; already serving life for the murder of his girlfriend, was identified by dna in 2006. he confessed to lawrence&amp;rsquo;s murder, then committed suicide." id="andrew-mallard">
+        <div class="case-media">
+          <img src="assets/img/andrew-mallard.svg" alt="Case illustration: Andrew Mallard" loading="lazy">
+          <div class="case-flag">&#127462;&#127482;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1994</span>
+            <span class="country">&#127462;&#127482; Australia</span>
+            <span class="badge success">Exonerated · 2005</span>
+          </div>
+          <h3>Andrew Mallard</h3>
+          <p class="case-blurb">Andrew Mallard was convicted in 1995 of the 1994 murder of Pamela Lawrence in her Perth jewelry shop. The prosecution relied on a coerced confession (Mallard had mental-health issues) and on flawed forensics. After 12 years in prison, the High Court of Australia quashed the conviction in 2005. DNA evidence in 2006 identified the real killer as Simon Rochford, who was already in prison for another murder. Rochford confessed and then killed himself. Mallard received A$3.25M compensation.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Andrew Mallard</strong> &mdash; had bipolar disorder; his confession was the product of his mental illness and interrogation pressure. Spent 12 years in prison.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Simon Rochford</strong> &mdash; already serving life for the murder of his girlfriend, was identified by DNA in 2006. He confessed to Lawrence&rsquo;s murder, then committed suicide.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Coerced confession from a person with bipolar disorder</li><li>Flawed forensic evidence (a &lsquo;weapon&rsquo; that didn&rsquo;t match the wounds)</li><li>Western Australia police suppressed evidence</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed 2005. Mallard exonerated 2006 after Rochford identified. Received A$3.25M compensation. The case led to reforms in WA police evidence-handling.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Andrew_Mallard" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="AU" data-year="1995" data-category="Murder" data-search="gordon wood australia 1995 murder gordon wood was convicted in 2008 of the 1995 murder of his girlfriend caroline byrne, a model found at the base of the gap cliff in sydney. the prosecution alleged wood threw her off the cliff because she knew about his boss&amp;rsquo;s financial fraud. convicted on the basis of flawed &amp;lsquo;physics&amp;rsquo; testimony about how far she could have fallen. after 3 years in prison, the nsw court of appeal quashed the conviction in 2012, citing unreliable expert testimony. wood was acquitted at retrial. gordon wood &amp;mdash; chauffeur to financier rene rivkin. spent 3 years in prison before acquittal. the actual cause of caroline byrne&amp;rsquo;s death remains disputed. wood&amp;rsquo;s acquittal does not formally identify another perpetrator." id="gordon-wood">
+        <div class="case-media">
+          <img src="assets/img/gordon-wood.svg" alt="Case illustration: Gordon Wood" loading="lazy">
+          <div class="case-flag">&#127462;&#127482;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1995</span>
+            <span class="country">&#127462;&#127482; Australia</span>
+            <span class="badge success">Acquitted · 2012</span>
+          </div>
+          <h3>Gordon Wood</h3>
+          <p class="case-blurb">Gordon Wood was convicted in 2008 of the 1995 murder of his girlfriend Caroline Byrne, a model found at the base of The Gap cliff in Sydney. The prosecution alleged Wood threw her off the cliff because she knew about his boss&rsquo;s financial fraud. Convicted on the basis of flawed &lsquo;physics&rsquo; testimony about how far she could have fallen. After 3 years in prison, the NSW Court of Appeal quashed the conviction in 2012, citing unreliable expert testimony. Wood was acquitted at retrial.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Gordon Wood</strong> &mdash; chauffeur to financier Rene Rivkin. Spent 3 years in prison before acquittal.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual cause of Caroline Byrne&rsquo;s death remains disputed. Wood&rsquo;s acquittal does not formally identify another perpetrator.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Flawed &lsquo;physics&rsquo; testimony about cliff trajectory</li><li>Sensational coverage of a model&rsquo;s death</li><li>Connection to the Rene Rivkin financial scandal</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed 2012. Acquitted at retrial 2012. Wood received A$9M+ in compensation from NSW. The case prompted review of expert-testimony standards in NSW.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Gordon_Wood_(Australian)" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="AU" data-year="2010" data-category="Murder" data-search="gene gibson australia 2010 murder gene gibson, an indigenous australian man from a remote western australia community, was convicted in 2012 of the 2010 murder of josh warnecke in broome. gibson &amp;lsquo;confessed&amp;rsquo; after a 7-hour interrogation conducted in circumstances later found to be unlawful &amp;mdash; he was intoxicated, had limited english, and was not properly offered an interpreter. after 5 years in prison, the wa court of appeal quashed the conviction in 2017. police had failed to disclose that another man had confessed. gene gibson &amp;mdash; an indigenous man with limited english, interrogated while intoxicated. spent 5 years in prison. another man had confessed to the murder, but police suppressed this. the real perpetrator was never formally identified." id="gene-gibson">
+        <div class="case-media">
+          <img src="assets/img/gene-gibson.svg" alt="Case illustration: Gene Gibson" loading="lazy">
+          <div class="case-flag">&#127462;&#127482;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2010</span>
+            <span class="country">&#127462;&#127482; Australia</span>
+            <span class="badge success">Conviction quashed · 2017</span>
+          </div>
+          <h3>Gene Gibson</h3>
+          <p class="case-blurb">Gene Gibson, an Indigenous Australian man from a remote Western Australia community, was convicted in 2012 of the 2010 murder of Josh Warnecke in Broome. Gibson &lsquo;confessed&rsquo; after a 7-hour interrogation conducted in circumstances later found to be unlawful &mdash; he was intoxicated, had limited English, and was not properly offered an interpreter. After 5 years in prison, the WA Court of Appeal quashed the conviction in 2017. Police had failed to disclose that another man had confessed.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Gene Gibson</strong> &mdash; an Indigenous man with limited English, interrogated while intoxicated. Spent 5 years in prison.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>Another man had confessed to the murder, but police suppressed this. The real perpetrator was never formally identified.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Unlawful interrogation (no interpreter, intoxicated suspect)</li><li>Suppressed confession by another suspect</li><li>Systemic issues with Indigenous-suspect interrogation in WA</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed 2017. Charges dropped. Gibson received A$1.5M compensation. The case prompted WA review of Indigenous interrogation procedures.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Gene_Gibson" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="CA" data-year="1993" data-category="Rape / Murder" data-search="william mullins-johnson canada 1993 rape / murder william mullins-johnson was convicted in 1994 of the 1993 rape and murder of his 4-year-old niece valin in sault ste. marie, ontario. the conviction rested entirely on the testimony of disgraced pediatric pathologist dr charles smith, who claimed valin had been strangled and sexually assaulted. after 12 years in prison, a review found smith&amp;rsquo;s testimony was wrong; valin had died of natural causes (a febrile seizure). conviction overturned in 2007, fully exonerated in 2008. william mullins-johnson &amp;mdash; spent 12 years in prison. was 24 at arrest. his niece had died of natural causes &amp;mdash; there was no crime. dr charles smith, the disgraced pediatric pathologist whose testimony was later found to have contributed to at least 13 wrongful convictions in ontario. there was no actual perpetrator &amp;mdash; valin died naturally." id="william-mullins-johnson">
+        <div class="case-media">
+          <img src="assets/img/william-mullins-johnson.svg" alt="Case illustration: William Mullins-Johnson" loading="lazy">
+          <div class="case-flag">&#127464;&#127462;</div>
+          <div class="case-cat">Rape / Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1993</span>
+            <span class="country">&#127464;&#127462; Canada</span>
+            <span class="badge success">Exonerated · 2008</span>
+          </div>
+          <h3>William Mullins-Johnson</h3>
+          <p class="case-blurb">William Mullins-Johnson was convicted in 1994 of the 1993 rape and murder of his 4-year-old niece Valin in Sault Ste. Marie, Ontario. The conviction rested entirely on the testimony of disgraced pediatric pathologist Dr Charles Smith, who claimed Valin had been strangled and sexually assaulted. After 12 years in prison, a review found Smith&rsquo;s testimony was wrong; Valin had died of natural causes (a febrile seizure). Conviction overturned in 2007, fully exonerated in 2008.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>William Mullins-Johnson</strong> &mdash; spent 12 years in prison. Was 24 at arrest. His niece had died of natural causes &mdash; there was no crime.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>Dr Charles Smith, the disgraced pediatric pathologist whose testimony was later found to have contributed to at least 13 wrongful convictions in Ontario. There was no actual perpetrator &mdash; Valin died naturally.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Dr Charles Smith&rsquo;s flawed pathology (he was later found responsible for 13+ wrongful convictions)</li><li>Confirmation bias toward family members as suspects</li><li>Pediatric death treated as suspicious without justification</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned 2007, exonerated 2008. Received C$4.25M compensation. The case led to the Goudge Inquiry into Ontario pediatric pathology (2008).</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/William_Mullins-Johnson" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="CA" data-year="1993" data-category="Murder (cot death)" data-search="tammy marquardt canada 1993 murder (cot death) tammy marquardt was convicted in 1995 of the 1993 murder of her 2-and-a-half-year-old son kenneth in oshawa, ontario. the conviction rested on dr charles smith&amp;rsquo;s testimony that kenneth had been strangled. after 14 years in prison, the ontario court of appeal overturned the conviction in 2011, finding smith&amp;rsquo;s testimony was unreliable. kenneth&amp;rsquo;s death was reclassified as natural (sids / seizure disorder). marquardt is one of several mothers wrongfully convicted on smith&amp;rsquo;s testimony. tammy marquardt &amp;mdash; spent 14 years in prison for the murder of her toddler son, who had died of natural causes. dr charles smith, the same disgraced pathologist whose testimony drove the mullins-johnson conviction. there was no actual perpetrator &amp;mdash; kenneth died naturally." id="tammy-marquardt">
+        <div class="case-media">
+          <img src="assets/img/tammy-marquardt.svg" alt="Case illustration: Tammy Marquardt" loading="lazy">
+          <div class="case-flag">&#127464;&#127462;</div>
+          <div class="case-cat">Murder (cot death)</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1993</span>
+            <span class="country">&#127464;&#127462; Canada</span>
+            <span class="badge success">Exonerated · 2011</span>
+          </div>
+          <h3>Tammy Marquardt</h3>
+          <p class="case-blurb">Tammy Marquardt was convicted in 1995 of the 1993 murder of her 2-and-a-half-year-old son Kenneth in Oshawa, Ontario. The conviction rested on Dr Charles Smith&rsquo;s testimony that Kenneth had been strangled. After 14 years in prison, the Ontario Court of Appeal overturned the conviction in 2011, finding Smith&rsquo;s testimony was unreliable. Kenneth&rsquo;s death was reclassified as natural (SIDS / seizure disorder). Marquardt is one of several mothers wrongfully convicted on Smith&rsquo;s testimony.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Tammy Marquardt</strong> &mdash; spent 14 years in prison for the murder of her toddler son, who had died of natural causes.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>Dr Charles Smith, the same disgraced pathologist whose testimony drove the Mullins-Johnson conviction. There was no actual perpetrator &mdash; Kenneth died naturally.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Dr Charles Smith&rsquo;s flawed pathology</li><li>&lsquo;Meadow&rsquo;s Law&rsquo;-style suspicion of multiple child deaths in a family</li><li>Pressure on juries to convict a mother accused of killing her child</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned 2011, exonerated 2011. Received C$7M compensation. Part of the Goudge Inquiry into Ontario pediatric pathology.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Tammy_Marquardt" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="FR" data-year="2001" data-category="Murder" data-search="marc machin france 2001 murder marc machin, 19, was convicted in 2004 of the 2001 murder of marie-agnès bedot on the île de la jatte in neuilly-sur-seine, near paris. convicted on the basis of flawed witness testimony and his own statements under pressure. sentenced to 18 years. after 8 years in prison, dna testing in 2012 matched another man, jean-claude narcy, who confessed. machin was exonerated and released in 2012. the case exposed continuing flaws in french investigation practices. marc machin &amp;mdash; was 19 at arrest. spent 8 years in prison for a murder he did not commit. jean-claude narcy &amp;mdash; identified by dna in 2012. he confessed and was convicted. machin&amp;rsquo;s false confession had been extracted under pressure." id="marc-machin">
+        <div class="case-media">
+          <img src="assets/img/marc-machin.svg" alt="Case illustration: Marc Machin" loading="lazy">
+          <div class="case-flag">&#127467;&#127479;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2001</span>
+            <span class="country">&#127467;&#127479; France</span>
+            <span class="badge success">Exonerated by DNA · 2012</span>
+          </div>
+          <h3>Marc Machin</h3>
+          <p class="case-blurb">Marc Machin, 19, was convicted in 2004 of the 2001 murder of Marie-Agnès Bedot on the Île de la Jatte in Neuilly-sur-Seine, near Paris. Convicted on the basis of flawed witness testimony and his own statements under pressure. Sentenced to 18 years. After 8 years in prison, DNA testing in 2012 matched another man, Jean-Claude Narcy, who confessed. Machin was exonerated and released in 2012. The case exposed continuing flaws in French investigation practices.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Marc Machin</strong> &mdash; was 19 at arrest. Spent 8 years in prison for a murder he did not commit.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Jean-Claude Narcy</strong> &mdash; identified by DNA in 2012. He confessed and was convicted. Machin&rsquo;s false confession had been extracted under pressure.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Flawed eyewitness testimony</li><li>Coerced statements treated as confession</li><li>Slow French adoption of post-conviction DNA testing</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Exonerated by DNA in 2012 after 8 years. Received €1.2M compensation. The case is one of several recent French DNA exonerations.</div>
+          <a class="source-link" href="https://fr.wikipedia.org/wiki/Affaire_Marc_Machin" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="FR" data-year="2000" data-category="Murder" data-search="jacques viguier france 2000 murder jacques viguier, a toulouse law professor, was convicted in 2002 of the 2000 murder of his wife suavet, who disappeared and was never found. the prosecution rested on circumstantial evidence and the testimony of a single witness (a former student of viguier&amp;rsquo;s, who was later found to have fabricated evidence). sentenced to 18 years. after 8 years, the court of appeal ordered a retrial; he was acquitted in 2018. the body was never found. the case became a french cause célèbre about presumption of innocence. jacques viguier &amp;mdash; a toulouse law professor. spent 8 years in prison for the alleged murder of his wife, whose body was never found. no actual perpetrator was identified. the witness whose testimony convicted viguier was later found to have fabricated evidence; the prosecution&amp;rsquo;s circumstantial case collapsed." id="jacques-viguier">
+        <div class="case-media">
+          <img src="assets/img/jacques-viguier.svg" alt="Case illustration: Jacques Viguier" loading="lazy">
+          <div class="case-flag">&#127467;&#127479;</div>
+          <div class="case-cat">Murder</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2000</span>
+            <span class="country">&#127467;&#127479; France</span>
+            <span class="badge success">Acquitted at retrial · 2018</span>
+          </div>
+          <h3>Jacques Viguier</h3>
+          <p class="case-blurb">Jacques Viguier, a Toulouse law professor, was convicted in 2002 of the 2000 murder of his wife Suavet, who disappeared and was never found. The prosecution rested on circumstantial evidence and the testimony of a single witness (a former student of Viguier&rsquo;s, who was later found to have fabricated evidence). Sentenced to 18 years. After 8 years, the Court of Appeal ordered a retrial; he was acquitted in 2018. The body was never found. The case became a French cause célèbre about presumption of innocence.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Jacques Viguier</strong> &mdash; a Toulouse law professor. Spent 8 years in prison for the alleged murder of his wife, whose body was never found.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No actual perpetrator was identified. The witness whose testimony convicted Viguier was later found to have fabricated evidence; the prosecution&rsquo;s circumstantial case collapsed.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Single witness testimony (later found fabricated)</li><li>Media pre-judgment of a &lsquo;professor murders wife&rsquo; narrative</li><li>Conviction obtained without a body</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Acquitted at retrial in 2018 after 8 years in prison. Viguier returned to teaching. The case prompted French debate about circumstantial-evidence standards.</div>
+          <a class="source-link" href="https://fr.wikipedia.org/wiki/Affaire_Viguier" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+      </div>
+      <div id="no-results" class="no-results" style="display:none;">
+        <p>No cases match your search. <button id="reset-filters" class="link-btn">Reset filters</button></p>
       </div>
     </section>
 
@@ -834,38 +1887,132 @@
   </footer>
 
   <script>
-    // Filter chips
-    const chips = document.querySelectorAll('.chip');
-    const cards = document.querySelectorAll('.case-card');
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const filter = chip.dataset.filter;
-        chips.forEach(c => c.classList.remove('is-active'));
-        chip.classList.add('is-active');
-        cards.forEach(card => {
-          const match = filter === 'all' || card.dataset.country === filter;
-          card.style.display = match ? '' : 'none';
-        });
-        // Smooth scroll to archive if filtering
-        if (filter !== 'all') {
-          document.getElementById('archive').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+    // ============================================================
+    // Theme toggle
+    // ============================================================
+    (function() {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        try { localStorage.setItem('fa-theme', t); } catch (e) {}
+      }
+      btn.addEventListener('click', function() {
+        var cur = root.getAttribute('data-theme') || 'light';
+        setTheme(cur === 'light' ? 'dark' : 'light');
       });
-    });
+    })();
 
-    // Reveal-on-scroll animation
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
+    // ============================================================
+    // Filter + search
+    // ============================================================
+    (function() {
+      var cards = Array.from(document.querySelectorAll('.case-card'));
+      var chips = document.querySelectorAll('.chip[data-filter]');
+      var catChips = document.querySelectorAll('.cat-chip');
+      var searchInput = document.getElementById('search-input');
+      var searchClear = document.getElementById('search-clear');
+      var resultCount = document.getElementById('result-count');
+      var noResults = document.getElementById('no-results');
+      var resetBtn = document.getElementById('reset-filters');
+
+      var state = { country: 'all', category: 'all', query: '' };
+
+      function applyFilters() {
+        var visibleCount = 0;
+        cards.forEach(function(card) {
+          var countryOK = state.country === 'all' || card.dataset.country === state.country;
+          var categoryOK = state.category === 'all' || card.dataset.category === state.category;
+          var q = state.query.trim().toLowerCase();
+          var searchOK = !q || card.dataset.search.indexOf(q) !== -1;
+          var show = countryOK && categoryOK && searchOK;
+          card.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+        resultCount.textContent = visibleCount + (visibleCount === 1 ? ' case' : ' cases');
+        noResults.style.display = visibleCount === 0 ? '' : 'none';
+      }
+
+      // Country chips
+      chips.forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          chips.forEach(function(c) { c.classList.remove('is-active'); });
+          chip.classList.add('is-active');
+          state.country = chip.dataset.filter;
+          applyFilters();
+        });
+      });
+
+      // Category chips
+      catChips.forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          catChips.forEach(function(c) { c.classList.remove('is-active'); });
+          chip.classList.add('is-active');
+          state.category = chip.dataset.cat;
+          applyFilters();
+        });
+      });
+
+      // Search
+      var searchTimeout;
+      searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function() {
+          state.query = searchInput.value;
+          searchClear.style.display = state.query ? '' : 'none';
+          applyFilters();
+        }, 120);
+      });
+      searchClear.addEventListener('click', function() {
+        searchInput.value = '';
+        state.query = '';
+        searchClear.style.display = 'none';
+        applyFilters();
+        searchInput.focus();
+      });
+      resetBtn.addEventListener('click', function() {
+        state = { country: 'all', category: 'all', query: '' };
+        searchInput.value = '';
+        searchClear.style.display = 'none';
+        chips.forEach(function(c) { c.classList.toggle('is-active', c.dataset.filter === 'all'); });
+        catChips.forEach(function(c) { c.classList.toggle('is-active', c.dataset.cat === 'all'); });
+        applyFilters();
+      });
+
+      // Keyboard shortcut: '/' to focus search
+      document.addEventListener('keydown', function(e) {
+        if (e.key === '/' && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.value = '';
+          state.query = '';
+          searchClear.style.display = 'none';
+          applyFilters();
+          searchInput.blur();
         }
       });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.case-card, .principle').forEach(el => {
-      el.classList.add('reveal');
-      io.observe(el);
-    });
+    })();
+
+    // ============================================================
+    // Reveal-on-scroll
+    // ============================================================
+    (function() {
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.06 });
+      document.querySelectorAll('.case-card, .principle').forEach(function(el) {
+        el.classList.add('reveal');
+        io.observe(el);
+      });
+    })();
   </script>
 </body>
 </html>

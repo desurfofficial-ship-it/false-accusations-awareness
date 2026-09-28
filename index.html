@@ -3,269 +3,869 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>False Accusations Awareness</title>
+  <title>False Accusations Awareness &mdash; International Case Archive</title>
+  <meta name="description" content="A documented archive of high-profile false-accusation and wrongful-conviction cases from around the world. Educational resource for evidence, due process, and caution.">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f172a'/><text x='16' y='22' font-family='Georgia' font-size='18' fill='%23f8fafc' text-anchor='middle'>F</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="bg-glow"></div>
 
-  <header>
-    <div class="container">
-      <p class="eyebrow">Public Record · Educational Resource</p>
-      <h1>False Accusations<br><span>Awareness</span></h1>
-      <p class="tagline">Documenting cases where people were falsely accused of crimes — so society demands evidence, due process, and caution before rushing to judgment.</p>
-      <div class="stats">
-        <div class="stat"><span class="num">6</span><span class="label">Cases</span></div>
-        <div class="stat"><span class="num">Decades</span><span class="label">of documented harm</span></div>
-        <div class="stat"><span class="num">Evidence</span><span class="label">over accusation</span></div>
+  <a class="skip-link" href="#cases">Skip to case archive</a>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <span class="brand-mark">FA</span>
+        <span class="brand-name">False Accusations Awareness</span>
+      </div>
+      <nav class="topnav">
+        <a href="#archive">Archive</a>
+        <a href="#principles">Principles</a>
+        <a href="#about">About</a>
+        <a class="ghost-btn" href="https://github.com/desurfofficial-ship-it/false-accusations-awareness" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-blob hero-blob-a"></div>
+      <div class="hero-blob hero-blob-b"></div>
+      <div class="hero-grid-lines"></div>
+    </div>
+    <div class="container hero-inner">
+      <p class="eyebrow"><span class="eyebrow-dot"></span> International archive &middot; educational resource</p>
+      <h1>When the<br><em>accusation</em><br>was the crime.</h1>
+      <p class="tagline">A documented archive of high-profile false accusations and wrongful convictions from across the world &mdash; cases later disproven by DNA, confession, admission of fabrication, or official exoneration. Compiled so society remembers to demand evidence, due process, and restraint.</p>
+      <div class="hero-stats">
+        <div class="hstat"><span class="num">21</span><span class="label">Cases</span></div>
+        <div class="hstat"><span class="num">10</span><span class="label">Countries</span></div>
+        <div class="hstat"><span class="num">1931&ndash;2024</span><span class="label">Time span</span></div>
+        <div class="hstat"><span class="num">100+</span><span class="label">Years wrongfully served</span></div>
       </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="intro">
-      <h2>Why this exists</h2>
-      <p>False accusations destroy lives, families, and reputations. They also erode trust in genuine victims. This site collects well-documented public cases where accusations were later proven false or the accused were fully exonerated. The goal is awareness and caution — never to discourage reporting of real crimes.</p>
-      <div class="disclaimer">
-        <strong>Disclaimer</strong> — All information comes from publicly available records, court outcomes, and official statements. This is an educational resource. Always consult primary sources for full context.
+  <main>
+
+    <!-- Intro -->
+    <section class="intro container">
+      <div class="intro-grid">
+        <div>
+          <h2>Why this exists</h2>
+          <p>False accusations destroy lives, families, and reputations. They also erode trust in genuine victims &mdash; every fabricated claim makes the next real victim harder to believe. This archive collects well-documented public cases from many countries where accusations were later proven false or the accused were fully exonerated.</p>
+          <p>The goal is awareness and caution. Never to discourage reporting of real crimes. Never to deny the existence of real victims. Only to insist that evidence, due process, and the presumption of innocence matter &mdash; especially when public outrage is loudest.</p>
+        </div>
+        <aside class="disclaimer">
+          <strong>Editorial standard</strong>
+          <p>Every case on this site has a clear later outcome: an acquittal, a quashed conviction, a DNA exoneration, a pardon, an admission of fabrication, or an official finding of innocence. Sources are public records, court judgments, and major investigative reporting. Each card links to the public record for full context.</p>
+        </aside>
       </div>
     </section>
 
-    <section class="cases">
+    <!-- World map / country list -->
+    <section class="countries container">
       <div class="section-head">
-        <h2>Documented cases</h2>
-        <p class="section-sub">High-profile matters with clear later outcomes</p>
+        <h2>Cases by country</h2>
+        <p class="section-sub">Filter the archive below</p>
       </div>
-
-      <!-- Duke Lacrosse -->
-      <article class="case-card">
-        <div class="case-meta">
-          <span class="year">2006</span>
-          <span class="badge success">Accuser admitted lying · 2024</span>
-        </div>
-        <h3>Duke Lacrosse Case</h3>
-        <div class="case-grid">
-          <div class="col">
-            <h4>Falsely accused</h4>
-            <ul>
-              <li>David Evans</li>
-              <li>Collin Finnerty</li>
-              <li>Reade Seligmann</li>
-            </ul>
-            <p>Three Duke University lacrosse players accused of rape at a team party. Charges dropped in 2007; North Carolina Attorney General declared them innocent. No DNA supported the claim.</p>
-          </div>
-          <div class="col">
-            <h4>Person who lied</h4>
-            <p><strong>Crystal Mangum</strong>. In December 2024, while incarcerated for an unrelated murder conviction, she publicly admitted she fabricated the story, saying she “testified falsely” and “made up a story that wasn’t true” because she wanted validation.</p>
-          </div>
-          <div class="col">
-            <h4>Who supported the accusation</h4>
-            <ul>
-              <li>Prosecutor Mike Nifong (later disbarred)</li>
-              <li>Much of the national media</li>
-              <li>Some faculty and activist groups who presumed guilt early</li>
-            </ul>
-          </div>
-        </div>
-        <div class="outcome">Outcome: All charges dismissed. Players declared innocent. Mangum admitted fabrication nearly 19 years later.</div>
-      </article>
-
-      <!-- Brian Banks -->
-      <article class="case-card">
-        <div class="case-meta">
-          <span class="year">2002</span>
-          <span class="badge success">Accuser admitted lying</span>
-        </div>
-        <h3>Brian Banks</h3>
-        <div class="case-grid">
-          <div class="col">
-            <h4>Falsely accused</h4>
-            <p><strong>Brian Banks</strong> — standout high-school football player (Long Beach Poly) with a scholarship offer to USC. Arrested at 16 after a classmate accused him of rape. Faced a possible decades-long sentence; accepted a plea and served over five years in prison plus five years on parole and sex-offender registration.</p>
-          </div>
-          <div class="col">
-            <h4>Person who lied</h4>
-            <p><strong>Wanetta Gibson</strong>. In 2011 she contacted Banks on Facebook. In a meeting recorded by a private investigator she admitted the accusation was fabricated. She later confirmed the lie to prosecutors. Conviction formally dismissed in 2012.</p>
-          </div>
-          <div class="col">
-            <h4>Context</h4>
-            <ul>
-              <li>School and local pressure after the accusation</li>
-              <li>Plea driven by risk of life-altering sentence as a teenager</li>
-              <li>Civil settlement money that the accuser’s family did not want to return</li>
-            </ul>
-          </div>
-        </div>
-        <div class="outcome">Outcome: Conviction overturned May 2012. Sex-offender status removed. Banks later played professional football and became an advocate against wrongful convictions.</div>
-      </article>
-
-      <!-- Central Park Five -->
-      <article class="case-card">
-        <div class="case-meta">
-          <span class="year">1989</span>
-          <span class="badge success">Exonerated by DNA + confession</span>
-        </div>
-        <h3>Central Park Five / Exonerated Five</h3>
-        <div class="case-grid">
-          <div class="col">
-            <h4>Falsely accused</h4>
-            <ul>
-              <li>Antron McCray</li>
-              <li>Kevin Richardson</li>
-              <li>Yusef Salaam</li>
-              <li>Raymond Santana</li>
-              <li>Korey Wise</li>
-            </ul>
-            <p>Five teenagers convicted of the rape and assault of a jogger. Served 6–13 years. Convictions vacated in 2002.</p>
-          </div>
-          <div class="col">
-            <h4>Actual perpetrator</h4>
-            <p><strong>Matias Reyes</strong> — serial rapist who confessed in 2002 that he alone committed the attack. DNA confirmed his guilt and excluded the five. Original case rested heavily on confessions later found to have been coerced.</p>
-          </div>
-          <div class="col">
-            <h4>Public & institutional pressure</h4>
-            <ul>
-              <li>Intense media coverage that treated them as guilty</li>
-              <li>Public figures calling for harsh punishment before trial</li>
-              <li>Rush to judgment in a high-profile, racially charged case</li>
-            </ul>
-          </div>
-        </div>
-        <div class="outcome">Outcome: Convictions vacated. New York City settled for $41 million. The men are now known as the Exonerated Five.</div>
-      </article>
-
-      <!-- Amanda Knox -->
-      <article class="case-card">
-        <div class="case-meta">
-          <span class="year">2007</span>
-          <span class="badge success">Fully exonerated by high court</span>
-        </div>
-        <h3>Amanda Knox & Raffaele Sollecito</h3>
-        <div class="case-grid">
-          <div class="col">
-            <h4>Falsely accused</h4>
-            <p><strong>Amanda Knox</strong> (American exchange student) and <strong>Raffaele Sollecito</strong> (her then-boyfriend) were convicted of the murder of Knox’s roommate Meredith Kercher in Perugia, Italy. They spent nearly four years in prison. After a long series of trials and appeals, Italy’s highest court declared them innocent in 2015, citing “stunning flaws” in the investigation and a rush to judgment under intense media pressure.</p>
-          </div>
-          <div class="col">
-            <h4>Real perpetrator</h4>
-            <p><strong>Rudy Guede</strong> was separately convicted of the murder (his DNA was at the scene) and served a reduced sentence. The case against Knox and Sollecito relied on contested forensic claims and media-driven narrative rather than solid evidence linking them to the crime.</p>
-          </div>
-          <div class="col">
-            <h4>Amplifying factors</h4>
-            <ul>
-              <li>Global media frenzy and tabloid portrayals</li>
-              <li>Investigative shortcuts under international spotlight</li>
-              <li>Public presumption of guilt before facts were established</li>
-            </ul>
-          </div>
-        </div>
-        <div class="outcome">Outcome: Italy’s Court of Cassation fully exonerated both in 2015. Knox has since become an advocate for the wrongfully accused.</div>
-      </article>
-
-      <!-- Scottsboro Boys -->
-      <article class="case-card">
-        <div class="case-meta">
-          <span class="year">1931</span>
-          <span class="badge warn">Historical · Pardoned / Overturned</span>
-        </div>
-        <h3>Scottsboro Boys</h3>
-        <div class="case-grid">
-          <div class="col">
-            <h4>Falsely accused</h4>
-            <p>Nine African-American teenagers and young men accused of raping two white women on a train in Alabama. Eight initially sentenced to death. Multiple trials and appeals over years.</p>
-          </div>
-          <div class="col">
-            <h4>Accusers</h4>
-            <ul>
-              <li>Victoria Price</li>
-              <li>Ruby Bates</li>
-            </ul>
-            <p>One later recanted parts of her testimony. Evidence of fabrication and racial bias became clear over time. All were eventually freed or had convictions overturned; posthumous pardons followed.</p>
-          </div>
-          <div class="col">
-            <h4>Context of support</h4>
-            <ul>
-              <li>Jim Crow racial prejudice and all-white juries</li>
-              <li>Local political and social pressure to convict</li>
-              <li>Initial media and public acceptance of the accusations</li>
-            </ul>
-          </div>
-        </div>
-        <div class="outcome">Outcome: Landmark civil-rights cases. Convictions reversed or defendants released. Enduring symbol of the danger of unchecked accusations fueled by prejudice.</div>
-      </article>
-
-      <!-- Steven Avery first case -->
-      <article class="case-card">
-        <div class="case-meta">
-          <span class="year">1985</span>
-          <span class="badge success">Exonerated by DNA</span>
-        </div>
-        <h3>Steven Avery — First Conviction</h3>
-        <div class="case-grid">
-          <div class="col">
-            <h4>Falsely accused</h4>
-            <p><strong>Steven Avery</strong> convicted of sexual assault and attempted murder of a woman on a Lake Michigan beach despite multiple alibi witnesses. Served 18 years before DNA testing identified the real attacker.</p>
-          </div>
-          <div class="col">
-            <h4>Real perpetrator</h4>
-            <p><strong>Gregory Allen</strong> — a convicted felon whose DNA matched the crime-scene evidence. Avery was freed in 2003.</p>
-          </div>
-          <div class="col">
-            <h4>Factors</h4>
-            <ul>
-              <li>Eyewitness misidentification</li>
-              <li>Failure to investigate alternative suspects</li>
-              <li>Local pressure in a high-profile case</li>
-            </ul>
-          </div>
-        </div>
-        <div class="outcome">Outcome: Exonerated by DNA in 2003 after 18 years. (This entry concerns only the 1985 case; later events are separate.)</div>
-      </article>
-    </section>
-
-    <section class="principles">
-      <h2>Principles for a cautious society</h2>
-      <div class="principles-grid">
-        <div class="principle">
-          <span class="p-num">01</span>
-          <h3>Demand evidence</h3>
-          <p>Accusations are not proof. DNA, corroboration, and due process matter more than narrative.</p>
-        </div>
-        <div class="principle">
-          <span class="p-num">02</span>
-          <h3>Resist the rush</h3>
-          <p>Media, social media, and public opinion can amplify false claims long before facts emerge.</p>
-        </div>
-        <div class="principle">
-          <span class="p-num">03</span>
-          <h3>Protect both</h3>
-          <p>False accusations harm the accused and make it harder for real victims to be believed.</p>
-        </div>
-        <div class="principle">
-          <span class="p-num">04</span>
-          <h3>Hold power accountable</h3>
-          <p>Prosecutors, police, and media who ignore exculpatory evidence must face consequences.</p>
-        </div>
-        <div class="principle">
-          <span class="p-num">05</span>
-          <h3>Remember history</h3>
-          <p>Many of the worst injustices began with widely believed false claims.</p>
-        </div>
+      <div class="chips">
+        <button class="chip is-active" data-filter="all">All <span class="count">21</span></button>
+        <button class="chip" data-filter="AU">&#127462;&#127482; Australia <span class="count">1</span></button>
+        <button class="chip" data-filter="CA">&#127464;&#127462; Canada <span class="count">3</span></button>
+        <button class="chip" data-filter="FR">&#127467;&#127479; France <span class="count">2</span></button>
+        <button class="chip" data-filter="IE">&#127470;&#127466; Ireland <span class="count">1</span></button>
+        <button class="chip" data-filter="IT">&#127470;&#127481; Italy <span class="count">1</span></button>
+        <button class="chip" data-filter="JP">&#127471;&#127477; Japan <span class="count">1</span></button>
+        <button class="chip" data-filter="NZ">&#127464;&#127476; New Zealand <span class="count">1</span></button>
+        <button class="chip" data-filter="SE">&#127480;&#127466; Sweden <span class="count">1</span></button>
+        <button class="chip" data-filter="UK">&#127468;&#127463; United Kingdom <span class="count">5</span></button>
+        <button class="chip" data-filter="US">&#127482;&#127480; United States <span class="count">5</span></button>
       </div>
     </section>
 
-    <section class="about">
+    <!-- Case archive -->
+    <section class="cases container" id="archive">
+      <div class="section-head">
+        <h2>The archive</h2>
+        <p class="section-sub">21 documented cases &middot; ordered chronologically (most recent first)</p>
+      </div>
+      <div class="case-list">
+              <article class="case-card" data-country="US" data-year="2006" id="duke-lacrosse">
+        <div class="case-media">
+          <img src="assets/img/duke-lacrosse.svg" alt="Case illustration: Duke Lacrosse Case" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2006</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Accuser admitted lying · 2024</span>
+          </div>
+          <h3>Duke Lacrosse Case</h3>
+          <p class="case-blurb">Three Duke University lacrosse players accused of rape at a team party. Charges dropped in 2007; North Carolina Attorney General declared them innocent. No DNA supported the claim.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>David Evans</li><li>Collin Finnerty</li><li>Reade Seligmann</li></ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p><strong>Crystal Mangum</strong>. In December 2024, while incarcerated for an unrelated murder conviction, she publicly admitted she fabricated the story, saying she &ldquo;testified falsely&rdquo; and &ldquo;made up a story that wasn&rsquo;t true&rdquo; because she wanted validation.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Prosecutor Mike Nifong (later disbarred)</li><li>Much of the national media</li><li>Some faculty and activist groups who presumed guilt early</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> All charges dismissed. Players declared innocent. Mangum admitted fabrication nearly 19 years later.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Duke_lacrosse_case" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="2002" id="brian-banks">
+        <div class="case-media">
+          <img src="assets/img/brian-banks.svg" alt="Case illustration: Brian Banks" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2002</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Accuser admitted lying</span>
+          </div>
+          <h3>Brian Banks</h3>
+          <p class="case-blurb">Standout high-school football player (Long Beach Poly) with a scholarship offer to USC. Arrested at 16 after a classmate accused him of rape. Faced a possible decades-long sentence; accepted a plea and served over five years in prison plus five years on parole and sex-offender registration.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Brian Banks</strong></ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p><strong>Wanetta Gibson</strong>. In 2011 she contacted Banks on Facebook. In a meeting recorded by a private investigator she admitted the accusation was fabricated. She later confirmed the lie to prosecutors. Conviction formally dismissed in 2012.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>School and local pressure after the accusation</li><li>Plea driven by risk of life-altering sentence as a teenager</li><li>Civil settlement money that the accuser&rsquo;s family did not want to return</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned May 2012. Sex-offender status removed. Banks later played professional football and became an advocate against wrongful convictions.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Brian_Banks_(American_football)" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1989" id="central-park-five">
+        <div class="case-media">
+          <img src="assets/img/central-park-five.svg" alt="Case illustration: Central Park Five / Exonerated Five" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1989</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated by DNA + confession</span>
+          </div>
+          <h3>Central Park Five / Exonerated Five</h3>
+          <p class="case-blurb">Five teenagers convicted of the rape and assault of a jogger. Served 6&ndash;13 years. Convictions vacated in 2002.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Antron McCray</li><li>Kevin Richardson</li><li>Yusef Salaam</li><li>Raymond Santana</li><li>Korey Wise</li></ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p><strong>Matias Reyes</strong> &mdash; serial rapist who confessed in 2002 that he alone committed the attack. DNA confirmed his guilt and excluded the five. Original case rested heavily on confessions later found to have been coerced.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Intense media coverage that treated them as guilty</li><li>Public figures calling for harsh punishment before trial</li><li>Rush to judgment in a high-profile, racially charged case</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Convictions vacated. New York City settled for $41 million. The men are now known as the Exonerated Five.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Central_Park_Five" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="IT" data-year="2007" id="amanda-knox">
+        <div class="case-media">
+          <img src="assets/img/amanda-knox.svg" alt="Case illustration: Amanda Knox &amp; Raffaele Sollecito" loading="lazy">
+          <div class="case-flag">&#127470;&#127481;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2007</span>
+            <span class="country">&#127470;&#127481; Italy</span>
+            <span class="badge success">Fully exonerated by high court</span>
+          </div>
+          <h3>Amanda Knox & Raffaele Sollecito</h3>
+          <p class="case-blurb">Convicted of the murder of Knox&rsquo;s roommate Meredith Kercher in Perugia, Italy. They spent nearly four years in prison. After a long series of trials and appeals, Italy&rsquo;s highest court declared them innocent in 2015, citing &ldquo;stunning flaws&rdquo; in the investigation and a rush to judgment under intense media pressure.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Amanda Knox</strong> (American exchange student) and <strong>Raffaele Sollecito</strong> (her then-boyfriend)</ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p><strong>Rudy Guede</strong> was separately convicted of the murder (his DNA was at the scene) and served a reduced sentence. The case against Knox and Sollecito relied on contested forensic claims and media-driven narrative rather than solid evidence linking them to the crime.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Global media frenzy and tabloid portrayals</li><li>Investigative shortcuts under international spotlight</li><li>Public presumption of guilt before facts were established</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Italy&rsquo;s Court of Cassation fully exonerated both in 2015. Knox has since become an advocate for the wrongfully accused.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Murder_of_Meredith_Kercher" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1931" id="scottsboro-boys">
+        <div class="case-media">
+          <img src="assets/img/scottsboro-boys.svg" alt="Case illustration: Scottsboro Boys" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1931</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge warn">Historical &middot; Pardoned / Overturned</span>
+          </div>
+          <h3>Scottsboro Boys</h3>
+          <p class="case-blurb">Nine African-American teenagers and young men accused of raping two white women on a train in Alabama. Eight initially sentenced to death. Multiple trials and appeals over years.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul>Nine Black youths aged 13&ndash;20, including Haywood Patterson, Clarence Norris, and Olen Montgomery</ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p><strong>Victoria Price</strong> and <strong>Ruby Bates</strong>. One later recanted parts of her testimony. Evidence of fabrication and racial bias became clear over time. All were eventually freed or had convictions overturned; posthumous pardons followed.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Jim Crow racial prejudice and all-white juries</li><li>Local political and social pressure to convict</li><li>Initial media and public acceptance of the accusations</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Landmark civil-rights cases. Convictions reversed or defendants released. Enduring symbol of the danger of unchecked accusations fueled by prejudice.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Scottsboro_Boys" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="US" data-year="1985" id="steven-avery">
+        <div class="case-media">
+          <img src="assets/img/steven-avery.svg" alt="Case illustration: Steven Avery &amp;mdash; First Conviction" loading="lazy">
+          <div class="case-flag">&#127482;&#127480;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1985</span>
+            <span class="country">&#127482;&#127480; United States</span>
+            <span class="badge success">Exonerated by DNA</span>
+          </div>
+          <h3>Steven Avery &mdash; First Conviction</h3>
+          <p class="case-blurb">Convicted of sexual assault and attempted murder of a woman on a Lake Michigan beach despite multiple alibi witnesses. Served 18 years before DNA testing identified the real attacker.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Steven Avery</strong></ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p><strong>Gregory Allen</strong> &mdash; a convicted felon whose DNA matched the crime-scene evidence. Avery was freed in 2003.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Eyewitness misidentification</li><li>Failure to investigate alternative suspects</li><li>Local pressure in a high-profile case</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Exonerated by DNA in 2003 after 18 years. (This entry concerns only the 1985 case; later events are separate.)</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Steven_Avery" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1974" id="birmingham-six">
+        <div class="case-media">
+          <img src="assets/img/birmingham-six.svg" alt="Case illustration: Birmingham Six" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1974</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Convictions quashed · 1991</span>
+          </div>
+          <h3>Birmingham Six</h3>
+          <p class="case-blurb">Six Irish men wrongly convicted of the 1974 Birmingham pub bombings that killed 21 people. Sentenced to life imprisonment based on fabricated confessions and discredited forensic evidence. After 16 years in prison, their convictions were quashed by the Court of Appeal in 1991, exposing one of the worst miscarriages of justice in British history.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Hugh Callaghan</li><li>Patrick Hill</li><li>Gerard Hunter</li><li>Richard McIlkenny</li><li>William Power</li><li>John Walker</li></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No actual bomber was ever convicted for the attack. The case rested on coerced statements and on forensic tests (the Griess test) later shown to be unreliable &mdash; handling of the men&rsquo;s hands had produced false positives for explosives.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Anti-Irish sentiment and political pressure to convict after a horrific attack</li><li>Suppressed evidence by police and prosecutors</li><li>Sensational tabloid coverage presuming guilt</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Convictions quashed in 1991 after 16 years wrongful imprisonment. The case forced major reforms to UK criminal-appeals system.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Birmingham_Six" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1974" id="guildford-four">
+        <div class="case-media">
+          <img src="assets/img/guildford-four.svg" alt="Case illustration: Guildford Four" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1974</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Convictions quashed · 1989</span>
+          </div>
+          <h3>Guildford Four</h3>
+          <p class="case-blurb">Four people &mdash; including Gerry Conlon, then 20 &mdash; wrongly convicted of the 1974 Guildford pub bombings that killed five and injured 65. Convictions based on coerced confessions obtained under duress. After 15 years in prison, their convictions were quashed in 1989. Gerry Conlon&rsquo;s story was later told in the film <em>In the Name of the Father</em>.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><li>Gerry Conlon</li><li>Paul Hill</li><li>Patrick Armstrong</li><li>Carole Richardson</li></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual bombers were members of the IRA&rsquo;s active service unit, later identified but never charged for these specific attacks under a &lsquo;no prosecution&rsquo; decision. Police fabricated confessions through intimidation and sleep deprivation.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Public outrage and pressure to convict after pub bombings</li><li>Anti-Irish prejudice in 1970s Britain</li><li>Police fabrication of confession evidence</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Convictions quashed in 1989 after 15 years wrongful imprisonment. The Conlon family (the &lsquo;Maguire Seven&rsquo;) was also wrongly convicted and later exonerated.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Guildford_Four" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="AU" data-year="1980" id="lindy-chamberlain">
+        <div class="case-media">
+          <img src="assets/img/lindy-chamberlain.svg" alt="Case illustration: Lindy Chamberlain &amp;mdash; &amp;lsquo;A dingo took my baby&amp;rsquo;" loading="lazy">
+          <div class="case-flag">&#127462;&#127482;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1980</span>
+            <span class="country">&#127462;&#127482; Australia</span>
+            <span class="badge success">Conviction overturned · 1988</span>
+          </div>
+          <h3>Lindy Chamberlain &mdash; &lsquo;A dingo took my baby&rsquo;</h3>
+          <p class="case-blurb">Azaria Chamberlain, nine weeks old, disappeared from a campsite at Uluru (Ayers Rock) on 17 August 1980. Her mother Lindy insisted a dingo took the baby. Media mockery, public disbelief, and a flawed investigation led to Lindy being convicted of murder in 1982 and sentenced to life. She served over three years before new evidence (the baby&rsquo;s matinee jacket, found near a dingo lair) triggered her release. Conviction overturned in 1988; fourth coronial inquest in 2012 confirmed a dingo caused Azaria&rsquo;s death.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Lindy Chamberlain-Creighton</strong> and her then-husband <strong>Michael Chamberlain</strong></ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>No person &mdash; the prosecution was driven by forensic experts whose claims (about fetal blood in the family car) were later discredited. The actual cause was indeed a dingo attack, exactly as Chamberlain had said from the first night.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Sensational media coverage that turned &lsquo;a dingo took my baby&rsquo; into a national punchline</li><li>Flawed forensic testimony presented with false certainty</li><li>Public prejudice against the Chamberlains&rsquo; Seventh-day Adventist faith</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction overturned in 1988. Pardon issued. 2012 coronial inquest formally ruled Azaria died from a dingo attack. Lindy received A$1.3 million compensation.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Death_of_Azaria_Chamberlain" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1975" id="stefan-kiszko">
+        <div class="case-media">
+          <img src="assets/img/stefan-kiszko.svg" alt="Case illustration: Stefan Kiszko" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1975</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Exonerated by DNA · 1992</span>
+          </div>
+          <h3>Stefan Kiszko</h3>
+          <p class="case-blurb">An 11-year-old girl, Lesley Molseed, was stabbed to death in West Yorkshire in 1975. Police arrested Stefan Kiszko, a socially awkward local tax clerk with no history of violence. After two days of interrogation without a solicitor he &lsquo;confessed&rsquo;. Convicted of murder in 1976, sentenced to life. Served 16 years before DNA evidence excluded him entirely. The real killer, Ronald Castree, was identified by DNA in 2007.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Stefan Kiszko</strong> &mdash; had a medical condition (hypogonadism) that physically made the crime attributed to him impossible; this evidence was withheld by police.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Ronald Castree</strong> was convicted by DNA match in 2007, 32 years after the murder. Kiszko died of a heart attack in 1993, just months after his release, never fully recovering from prison.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Police suppressed exculpatory medical evidence</li><li>Coerced confession after sustained interrogation</li><li>Public pressure to solve a child-murder case quickly</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 1992 after 16 years wrongful imprisonment. Real perpetrator convicted in 2007. Kiszko&rsquo;s case led to reforms in UK confession-evidence rules.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Murder_of_Lesley_Molseed" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="CA" data-year="1969" id="david-milgaard">
+        <div class="case-media">
+          <img src="assets/img/david-milgaard.svg" alt="Case illustration: David Milgaard" loading="lazy">
+          <div class="case-flag">&#127464;&#127462;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1969</span>
+            <span class="country">&#127464;&#127462; Canada</span>
+            <span class="badge success">Exonerated by DNA · 1997</span>
+          </div>
+          <h3>David Milgaard</h3>
+          <p class="case-blurb">Gail Miller, a Saskatoon nursing aide, was raped and murdered in 1969. David Milgaard, then 16, was wrongly convicted in 1970 based on contradictory witness statements and police pressure on his teenage friends. He spent 23 years in prison maintaining his innocence. The Supreme Court of Canada quashed his conviction in 1992. DNA evidence in 1997 confirmed the real killer was Larry Fisher.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>David Milgaard</strong> &mdash; was 16 when arrested, 17 when convicted of a crime he did not commit. Spent his entire young adulthood in prison.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Larry Fisher</strong>, a serial rapist who lived near the crime scene. Fisher was convicted in 1999 on the basis of the DNA evidence that exonerated Milgaard.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Police pressure on teenage witnesses to implicate Milgaard</li><li>Suppressed evidence pointing to other suspects</li><li>No physical evidence linking Milgaard to the crime</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 1992. DNA exoneration in 1997. Federal government awarded C$10 million compensation in 1999. Milgaard became an advocate for the wrongfully convicted until his death in 2023.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/David_Milgaard" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="CA" data-year="1959" id="steven-truscott">
+        <div class="case-media">
+          <img src="assets/img/steven-truscott.svg" alt="Case illustration: Steven Truscott" loading="lazy">
+          <div class="case-flag">&#127464;&#127462;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1959</span>
+            <span class="country">&#127464;&#127462; Canada</span>
+            <span class="badge success">Acquitted · 2007</span>
+          </div>
+          <h3>Steven Truscott</h3>
+          <p class="case-blurb">Lynne Harper, 12, was murdered in rural Ontario in 1959. Steven Truscott, then 14, was the last person seen with her. After a sensational 15-day trial he became the youngest person in Canada sentenced to hang. The sentence was commuted to life. He was paroled in 1969. Decades of investigation by journalist Isabel LeBourdais and others exposed the flawed case. In 2007 the Ontario Court of Appeal acquitted him, finding the conviction a &lsquo;miscarriage of justice&rsquo;.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Steven Truscott</strong> &mdash; was 14 years old at the time of the alleged crime and was sentenced to death by hanging at age 14.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The actual perpetrator was never identified. The case rested on flawed forensic timing evidence (time of death) that was later shown to be unreliable, and on a rushed investigation that excluded other viable suspects.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Cold-War era pressure to convict quickly</li><li>Flawed forensic pathology on time of death</li><li>Sensational press coverage of a child-on-child murder</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Acquitted by Ontario Court of Appeal in 2007, 48 years after the conviction. Awarded C$6.5 million compensation.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Steven_Truscott" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="JP" data-year="1964" id="iwao-hakamada">
+        <div class="case-media">
+          <img src="assets/img/iwao-hakamada.svg" alt="Case illustration: Iwao Hakamada" loading="lazy">
+          <div class="case-flag">&#127471;&#127477;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1964</span>
+            <span class="country">&#127471;&#127477; Japan</span>
+            <span class="badge success">Acquitted · 2024</span>
+          </div>
+          <h3>Iwao Hakamada</h3>
+          <p class="case-blurb">A former professional boxer, Hakamada was convicted in 1968 of murdering his employer&rsquo;s family and burning their house in Shizuoka, Japan. He &lsquo;confessed&rsquo; after 20 days of interrogation without a lawyer. Sentenced to death in 1980. He was the world&rsquo;s longest-serving death row inmate when released in 2014 after DNA evidence raised doubts. The prosecution fought his retrial for a decade. In September 2024 the Shizuoka District Court formally acquitted him &mdash; 56 years after his arrest.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Iwao Hakamada</strong> &mdash; spent 48 years on death row, much of it in solitary confinement. He is now in his late 80s and lives with severe mental-health consequences.</ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p>The actual perpetrator was never found. The conviction rested on a coerced confession and on &lsquo;evidence&rsquo; (blood-stained pajamas) that prosecutors were later found to have fabricated or planted. Five items of exculpatory evidence were withheld from the defense for decades.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Japanese &lsquo;hostage justice&rsquo; interrogation system that produces coerced confessions</li><li>Prosecutorial misconduct including withholding and likely fabricating evidence</li><li>Decades of delay in granting a retrial</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Released in 2014. Formally acquitted by Shizuoka District Court in September 2024. The acquittal is a landmark in Japanese criminal-justice reform.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Iwao_Hakamada" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="SE" data-year="1994" id="sture-bergwall">
+        <div class="case-media">
+          <img src="assets/img/sture-bergwall.svg" alt="Case illustration: Sture Bergwall (formerly &amp;lsquo;Thomas Quick&amp;rsquo;)" loading="lazy">
+          <div class="case-flag">&#127480;&#127466;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1994</span>
+            <span class="country">&#127480;&#127466; Sweden</span>
+            <span class="badge success">All convictions quashed · 2013</span>
+          </div>
+          <h3>Sture Bergwall (formerly &lsquo;Thomas Quick&rsquo;)</h3>
+          <p class="case-blurb">Sture Bergwall, a patient at a Swedish psychiatric hospital, &lsquo;confessed&rsquo; under heavy medication and therapeutic pressure to more than 30 unsolved murders across Scandinavia between 1994 and 2001. He was convicted of eight. Investigative journalists exposed that the confessions were induced, that therapists fed him crime details, and that no physical evidence linked him to any murder. All eight convictions were quashed between 2008 and 2013. None of the murders has been re-solved.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Sture Bergwall</strong> &mdash; himself an offender (he had committed non-lethal violent crimes) but not a serial killer. His &lsquo;confessions&rsquo; were the product of recovered-memory therapy and sedation.</ul>
+            </div>
+            <div class="col">
+              <h4>Person who lied / Real perpetrator</h4>
+              <p>No actual perpetrator was identified in any of the eight cases. Bergwall&rsquo;s confessions led investigators away from real suspects, and the cases went cold.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Recovered-memory therapy discredited by modern psychology</li><li>Therapists and prosecutors fed Bergwall case details, then treated his repetition as &lsquo;recall&rdquo;</li><li>Media celebration of Quick as &lsquo;Scandinavia&rsquo;s worst serial killer&rsquo;</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> All eight murder convictions quashed by 2013. Bergwall released from psychiatric care in 2015. The cases prompted review of Swedish interrogation and confession-handling practices.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Thomas_Quick" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="1999" id="post-office-horizon">
+        <div class="case-media">
+          <img src="assets/img/post-office-horizon.svg" alt="Case illustration: UK Post Office / Horizon Scandal" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1999</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge warn">Mass miscarriage · Quashed 2024+</span>
+          </div>
+          <h3>UK Post Office / Horizon Scandal</h3>
+          <p class="case-blurb">Between 1999 and 2015 the UK Post Office prosecuted over 700 sub-postmasters and sub-postmistresses for theft, false accounting, and fraud. The accusations were based on the defective Horizon IT system, which produced phantom shortfalls. Lives were destroyed: imprisonments, bankruptcies, divorces, suicides. The Post Office denied for years that the software could be wrong. A 2019 High Court ruling proved it could. Mass convictions began being quashed in 2021. By 2024 fewer than 100 had been overturned; the public inquiry reported in 2024.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul>More than 700 UK Post Office branch managers, including <strong>Alan Bates</strong> (whose fight inspired the 2024 ITV drama), <strong>Lee Castleton</strong> (bankrupted defending himself), <strong>Seeta Misra</strong> (the first to be prosecuted, jailed while pregnant), and many other ordinary people trusted to run local Post Offices.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Fujitsu / Post Office Ltd.</strong> The Horizon IT system, supplied by Fujitsu, generated false accounting entries. Post Office executives aggressively prosecuted despite internal warnings. CEO Paula Vennells later returned her CBE.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Institutional arrogance and refusal to investigate IT failures</li><li>Prosecutions pursued by the Post Office itself (a conflict of interest)</li><li>Years of media indifference until the 2024 ITV drama <em>Mr Bates vs The Post Office</em></li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Mass quashing of convictions ongoing; 2024 public inquiry findings condemned the Post Office. Compensation schemes launched but slow. Multiple suicides linked to wrongful prosecutions.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/British_Post_Office_scandal" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="UK" data-year="2001" id="barry-george">
+        <div class="case-media">
+          <img src="assets/img/barry-george.svg" alt="Case illustration: Barry George" loading="lazy">
+          <div class="case-flag">&#127468;&#127463;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">2001</span>
+            <span class="country">&#127468;&#127463; United Kingdom</span>
+            <span class="badge success">Acquitted at retrial · 2008</span>
+          </div>
+          <h3>Barry George</h3>
+          <p class="case-blurb">BBC television presenter Jill Dando was shot dead on her doorstep in April 1999. The murder shocked Britain. After a year-long investigation, police arrested Barry George, a local man with mental-health problems and a history of obsessions but no history of violence. Convicted in 2001 on the basis of a single particle of firearms residue in his coat pocket. Sentenced to life. After eight years the Court of Appeal quashed the conviction; he was acquitted at retrial in 2008.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Barry George</strong> &mdash; had learning difficulties and epilepsy; was unable to effectively assist in his own defense during the original trial.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The real killer has never been identified. The firearms-residue evidence was later shown to be of no probative value (it could have come from countless sources, including police handling).</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Public pressure to solve a celebrity murder quickly</li><li>Misleading forensic evidence presented without proper statistical context</li><li>Media vilification of the defendant</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 2007. Acquitted at retrial in 2008 after 8 years wrongful imprisonment. The real perpetrator was never found.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Murder_of_Jill_Dando" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="FR" data-year="1986" id="patrick-dils">
+        <div class="case-media">
+          <img src="assets/img/patrick-dils.svg" alt="Case illustration: Patrick Dils" loading="lazy">
+          <div class="case-flag">&#127467;&#127479;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1986</span>
+            <span class="country">&#127467;&#127479; France</span>
+            <span class="badge success">Exonerated · 2002</span>
+          </div>
+          <h3>Patrick Dils</h3>
+          <p class="case-blurb">Patrick Dils, 16, was convicted in 1989 of the 1986 hammer-murder of two children in Montigny-lès-Metz, eastern France &mdash; the youngest person ever sentenced to life in France at the time. He &lsquo;confessed&rsquo; after sustained police interrogation. The real killer was serial murderer Francis Heaulme, who was at the scene and whose modus operandi matched. After years of legal battle Dils was exonerated in 2002.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Patrick Dils</strong> &mdash; was 16 at the time of arrest; spent 15 years in prison before exoneration.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Francis Heaulme</strong>, one of France&rsquo;s most prolific serial killers, was identified as the real murderer. Heaulme was separately convicted of multiple murders but was not initially linked to Montigny because police had already &lsquo;solved&rsquo; the case with Dils.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Police tunnel vision and coerced confession of a minor</li><li>Failure to investigate Francis Heaulme as a suspect despite his presence at the scene</li><li>Sensational coverage that branded Dils a monster before trial</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Exonerated in 2002 after 15 years wrongful imprisonment. Heaulme was convicted of the Montigny murders in 2007. Dils received state compensation and wrote a memoir.</div>
+          <a class="source-link" href="https://fr.wikipedia.org/wiki/Patrick_Dils" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="CA" data-year="1984" id="guy-paul-morin">
+        <div class="case-media">
+          <img src="assets/img/guy-paul-morin.svg" alt="Case illustration: Guy Paul Morin" loading="lazy">
+          <div class="case-flag">&#127464;&#127462;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1984</span>
+            <span class="country">&#127464;&#127462; Canada</span>
+            <span class="badge success">Exonerated by DNA · 1996</span>
+          </div>
+          <h3>Guy Paul Morin</h3>
+          <p class="case-blurb">Christine Jessop, 9, was abducted, raped, and murdered in Queensville, Ontario in 1984. Guy Paul Morin, her 25-year-old neighbor, was charged in 1985. He was acquitted at his first trial in 1986; the Court of Appeal ordered a retrial; he was convicted in 1992 and sentenced to life. DNA testing in 1995 excluded him. Conviction overturned in 1996. The real killer, Calvin Hoover, was identified by DNA in 2020.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Guy Paul Morin</strong> &mdash; a quiet, introverted man whose odd behavior (collecting insects, playing the clarinet) made him a target of suspicion.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p><strong>Calvin Hoover</strong>, a neighbor of the Jessop family, was identified by DNA in 2020 (he had died by suicide in 2015). The original case rested on a coerced jailhouse-informant testimony and flawed forensic evidence.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Jailhouse-informant testimony (later discredited as a systemic problem)</li><li>Flawed forensic hair and fiber analysis</li><li>Confirmation bias driven by Morin&rsquo;s eccentricities</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Exonerated in 1996 after 10 years of legal ordeal. C$1.25 million compensation. The case led to a public inquiry that reformed Ontario&rsquo;s use of jailhouse informants and forensic evidence.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Guy_Paul_Morin" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="NZ" data-year="1970" id="arthur-allan-thomas">
+        <div class="case-media">
+          <img src="assets/img/arthur-allan-thomas.svg" alt="Case illustration: Arthur Allan Thomas" loading="lazy">
+          <div class="case-flag">&#127464;&#127476;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1970</span>
+            <span class="country">&#127464;&#127476; New Zealand</span>
+            <span class="badge warn">Royal pardon · 1979</span>
+          </div>
+          <h3>Arthur Allan Thomas</h3>
+          <p class="case-blurb">Jeanette and Harvey Crewe were murdered in their farmhouse in Pukekawa, New Zealand, in June 1970. Police focused on Arthur Allan Thomas, a neighbor. He was convicted in 1971 and again at retrial in 1973, on the basis of a single .22 cartridge case allegedly found in his garden. Both convictions rested on evidence later shown to have been planted by police. A Royal Commission in 1980 found police had fabricated evidence. Thomas received a royal pardon in 1979.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Arthur Allan Thomas</strong> &mdash; a New Zealand farmer who spent 9 years in prison for a crime he did not commit. The case divided the nation for a decade.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The real killer was never charged. The Royal Commission found police had planted the cartridge case to frame Thomas; no physical evidence actually linked him to the murders.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Police fabrication and planting of evidence</li><li>Confirmation bias after early suspicion fell on Thomas</li><li>Two juries accepted the planted evidence</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Royal pardon in 1979. Compensation paid. The case led to reforms in New Zealand police evidence-handling and is a foundational case in NZ justice history.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Crewe_murders" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="FR" data-year="1991" id="omar-raddad">
+        <div class="case-media">
+          <img src="assets/img/omar-raddad.svg" alt="Case illustration: Omar Raddad &amp;mdash; &amp;lsquo;Omar m&amp;rsquo;a tuer&amp;rsquo;" loading="lazy">
+          <div class="case-flag">&#127467;&#127479;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1991</span>
+            <span class="country">&#127467;&#127479; France</span>
+            <span class="badge warn">Partial pardon · 1996</span>
+          </div>
+          <h3>Omar Raddad &mdash; &lsquo;Omar m&rsquo;a tuer&rsquo;</h3>
+          <p class="case-blurb">Ghislaine Marchal, a wealthy French widow, was found murdered in her villa in Mougins (French Riviera) in 1991. The message &lsquo;Omar m&rsquo;a tu&eacute;e&rsquo; (&lsquo;Omar killed me&rsquo;) was written in her blood on a door. Omar Raddad, her Moroccan gardener, was convicted in 1994 despite no physical evidence linking him to the crime, multiple inconsistencies in the blood-message analysis, and an alibi. He served 7 years before being granted a partial pardon by President Chirac in 1996. A re-trial was denied despite later DNA evidence suggesting another perpetrator.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Omar Raddad</strong> &mdash; a Moroccan migrant gardener whose conviction became a cause c&eacute;lèbre in France and a focal point for accusations of systemic racism in the French justice system.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The true perpetrator was never identified. DNA recovered from the scene in 2015 (from door handles and an unknown male) did not match Raddad, but French courts denied a retrial.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Racial and class prejudice against a Moroccan gardener</li><li>Overconfidence in a (likely staged) &lsquo;dying message&rsquo; written in blood</li><li>Media sensationalism and refusal to investigate alternative theories</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Partial presidential pardon in 1996 after 7 years in prison. Raddad has continued to seek full exoneration. The case remains controversial; French courts have repeatedly denied a full retrial despite new DNA evidence.</div>
+          <a class="source-link" href="https://fr.wikipedia.org/wiki/Omar_Raddad" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+
+      <article class="case-card" data-country="IE" data-year="1995" id="nora-wall">
+        <div class="case-media">
+          <img src="assets/img/nora-wall.svg" alt="Case illustration: Sister Nora Wall" loading="lazy">
+          <div class="case-flag">&#127470;&#127466;</div>
+        </div>
+        <div class="case-body">
+          <div class="case-meta">
+            <span class="year">1995</span>
+            <span class="country">&#127470;&#127466; Ireland</span>
+            <span class="badge success">Conviction quashed · 1999</span>
+          </div>
+          <h3>Sister Nora Wall</h3>
+          <p class="case-blurb">Nora Wall, a Irish religious sister (Sister of Mercy), was convicted in 1999 of raping a child in her care at a Dublin residential home in the late 1970s. The case rested on the testimony of the complainant, who was later shown to have made false allegations in other contexts, and on the testimony of a second witness whose evidence the prosecution had wrongly characterized. The Court of Appeal quashed the conviction after just four days. It was the first quashed conviction in Ireland&rsquo;s history of clerical-abuse prosecutions.</p>
+          <div class="case-grid">
+            <div class="col">
+              <h4>Falsely accused</h4>
+              <ul><strong>Sister Nora Wall</strong> &mdash; a nun who ran a Dublin children&rsquo;s home. The accusation destroyed her reputation; the quashing came too late to repair it.</ul>
+            </div>
+            <div class="col">
+              <h4>Accuser / Real perpetrator</h4>
+              <p>The principal complainant later faced unrelated charges of making false allegations in other cases. The DPP subsequently apologized for the flawed prosecution.</p>
+            </div>
+            <div class="col">
+              <h4>Who / what amplified it</h4>
+              <ul><li>Climate of public outrage over clerical abuse in 1990s Ireland (understandable, but it produced pressure to convict)</li><li>Prosecution failure to disclose material that would have undermined the complainant&rsquo;s credibility</li><li>Media coverage that presumed guilt</li></ul>
+            </div>
+          </div>
+          <div class="outcome"><strong>Outcome.</strong> Conviction quashed in 1999, four days after the trial ended. The case has been cited in subsequent Irish reforms of disclosure rules.</div>
+          <a class="source-link" href="https://en.wikipedia.org/wiki/Nora_Wall" target="_blank" rel="noopener">Read the public record &rarr;</a>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section class="principles" id="principles">
+      <div class="container">
+        <div class="section-head">
+          <h2>Principles for a cautious society</h2>
+          <p class="section-sub">Five habits that prevent the next wrongful conviction</p>
+        </div>
+        <div class="principles-grid">
+          <div class="principle">
+            <span class="p-num">01</span>
+            <h3>Demand evidence</h3>
+            <p>Accusations are not proof. DNA, corroboration, and due process matter more than narrative. The most damaging false accusations spread because audiences confused a compelling story with a proven fact.</p>
+          </div>
+          <div class="principle">
+            <span class="p-num">02</span>
+            <h3>Resist the rush</h3>
+            <p>Media, social media, and public opinion can amplify false claims long before facts emerge. The cases in this archive show how public pressure bends investigations toward the convenient suspect, not the actual perpetrator.</p>
+          </div>
+          <div class="principle">
+            <span class="p-num">03</span>
+            <h3>Protect both</h3>
+            <p>False accusations harm the accused and make it harder for real victims to be believed. Treating every accusation critically is not victim-blaming &mdash; it is the only way to keep the system credible for genuine survivors.</p>
+          </div>
+          <div class="principle">
+            <span class="p-num">04</span>
+            <h3>Hold power accountable</h3>
+            <p>Prosecutors, police, and forensic analysts who suppress exculpatory evidence, fabricate confessions, or present junk science as fact must face consequences. Immunity without accountability breeds injustice.</p>
+          </div>
+          <div class="principle">
+            <span class="p-num">05</span>
+            <h3>Remember history</h3>
+            <p>Many of the worst injustices &mdash; the Scottsboro Boys, the Guildford Four, the Birmingham Six &mdash; began with widely believed false claims. Today&rsquo;s outrage is tomorrow&rsquo;s miscarriage of justice unless we remember.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about container" id="about">
       <h2>About this project</h2>
-      <p>Open educational resource. Cases are selected from publicly documented, high-profile matters with clear later outcomes (exoneration, admission of fabrication, DNA evidence, or official findings of innocence). The site does not claim completeness — only to illustrate the human cost of false accusations and the need for caution.</p>
+      <p>This is an open educational resource. Cases are selected from publicly documented, high-profile matters with clear later outcomes (exoneration, admission of fabrication, DNA evidence, or official findings of innocence). The site does not claim completeness &mdash; only to illustrate the human cost of false accusations and the need for caution.</p>
+      <p>If you believe a case should be added, please open an issue or pull request on GitHub. Submissions should cite a clear, public, later outcome. The tone is factual; the goal is awareness.</p>
       <p class="repo-link">Repository: <a href="https://github.com/desurfofficial-ship-it/false-accusations-awareness" target="_blank" rel="noopener">github.com/desurfofficial-ship-it/false-accusations-awareness</a></p>
     </section>
+
   </main>
 
   <footer>
-    <div class="container">
-      <p>Built for awareness and due process. Truth matters.</p>
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="brand-mark">FA</span>
+        <div>
+          <strong>False Accusations Awareness</strong>
+          <p>Built for awareness and due process. Truth matters.</p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <p>Educational use. All cases drawn from public records.</p>
+        <p class="footer-license">No claim of completeness. Always consult primary sources.</p>
+      </div>
     </div>
   </footer>
+
+  <script>
+    // Filter chips
+    const chips = document.querySelectorAll('.chip');
+    const cards = document.querySelectorAll('.case-card');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const filter = chip.dataset.filter;
+        chips.forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.country === filter;
+          card.style.display = match ? '' : 'none';
+        });
+        // Smooth scroll to archive if filtering
+        if (filter !== 'all') {
+          document.getElementById('archive').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Reveal-on-scroll animation
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.case-card, .principle').forEach(el => {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+  </script>
 </body>
 </html>

@@ -16,6 +16,19 @@ To enable: repository **Settings → Pages → Source: Deploy from a branch → 
 
 To run locally: clone the repo and open `index.html` in any browser. No build step is required — the site is plain HTML/CSS with self-hosted SVG illustrations.
 
+> **Note on the registry page**: The `/registry.html` page loads `assets/data/registry-data.json` via `fetch()`. When running locally by opening the HTML file directly (the `file://` protocol), some browsers block `fetch()` due to CORS. To preview the registry page locally, serve the directory over HTTP:
+> ```bash
+> cd false-accusations-awareness && python3 -m http.server 8000
+> # then visit http://localhost:8000/registry.html
+> ```
+
+---
+
+## Pages
+
+- **`/` (index.html)** — Editorial archive: 51 in-depth documented cases with illustrations, full write-ups, contributing-factor analysis, and "Pictures & coverage" outbound links.
+- **`/registry.html`** — Sortable/searchable data browser: 183 brief entries (curated subset, expandable to the full NRE ~3,600-case dataset via `scripts/convert_nre_csv.py`).
+
 ---
 
 ## Featured cases (21 total, 10 countries)
@@ -71,12 +84,27 @@ Editorial light theme with magazine-style typography: **Fraunces** (serif headli
 
 ```
 false-accusations-awareness/
-├── index.html              # Main page
-├── styles.css              # Editorial redesign stylesheet
+├── index.html              # Editorial archive (51 in-depth cases)
+├── registry.html           # Sortable data browser (183 brief entries)
+├── styles.css              # Shared editorial stylesheet (light + dark)
 ├── assets/
-│   └── img/                # 21 self-hosted SVG illustrations (one per case)
+│   ├── img/                # 51 self-hosted SVG illustrations
+│   └── data/
+│       └── registry-data.json   # Brief-entries dataset (loadable client-side)
+├── scripts/
+│   └── convert_nre_csv.py  # Convert official NRE CSV to registry-data.json
 └── README.md
 ```
+
+### Ingesting the full NRE dataset
+
+The current `registry-data.json` is a curated subset of 183 well-documented exonerations. To replace it with the full ~3,600-case dataset from the National Registry of Exonerations:
+
+1. Visit <https://exonerationregistry.org/> in a browser
+2. Click "Download Data" to get the CSV (Cloudflare blocks automated downloads)
+3. Save it as `exoneration-data.csv` in the repo root
+4. Run: `python3 scripts/convert_nre_csv.py`
+5. Commit and push — `/registry.html` will serve the full dataset
 
 ## Contributing
 

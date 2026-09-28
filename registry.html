@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exoneration Registry &mdash; Brief Entries | False Accusations Awareness</title>
+  <meta name="description" content="Searchable, sortable registry of documented exonerations from around the world. Each entry is a one-line summary with source.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f172a'/><text x='16' y='22' font-family='Georgia' font-size='18' fill='%23f8fafc' text-anchor='middle'>R</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('fa-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    /* Registry-specific styles */
+    .reg-loading {
+      text-align: center;
+      padding: 4rem 1.5rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .reg-loading .spinner {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--line);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Stats dashboard */
+    .reg-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1.2rem 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-card .stat-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--ink);
+      display: block;
+    }
+    .stat-card .stat-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Mini distribution chart */
+    .reg-dist {
+      grid-column: span 2;
+    }
+    @media (max-width: 700px) {
+      .reg-dist { grid-column: span 1; }
+    }
+    .reg-dist .dist-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.83rem;
+    }
+    .reg-dist .dist-label {
+      min-width: 110px;
+      color: var(--ink-2);
+      font-weight: 500;
+    }
+    .reg-dist .dist-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--surface-2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .reg-dist .dist-bar {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+    .reg-dist .dist-count {
+      min-width: 32px;
+      text-align: right;
+      color: var(--muted);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Filter row */
+    .reg-filters {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .reg-filters .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .reg-filters .filter-group:last-child { margin-bottom: 0; }
+    .reg-filters label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .reg-filters select,
+    .reg-filters input[type="text"] {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--bg-2);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.92rem;
+      transition: border-color 0.15s;
+    }
+    .reg-filters select:focus,
+    .reg-filters input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(184, 51, 42, 0.12);
+    }
+    [data-theme="dark"] .reg-filters select,
+    [data-theme="dark"] .reg-filters input[type="text"] {
+      background: var(--surface);
+    }
+    .reg-filters .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Table */
+    .reg-table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .reg-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .reg-table thead {
+      background: var(--bg-2);
+      position: sticky;
+      top: 56px;
+      z-index: 5;
+    }
+    [data-theme="dark"] .reg-table thead { background: var(--surface-2); }
+    .reg-table th {
+      text-align: left;
+      padding: 0.85rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+    }
+    .reg-table th:hover { color: var(--ink); background: var(--surface-2); }
+    .reg-table th.sort-asc::after  { content: " \2191"; color: var(--accent); font-weight: 700; }
+    .reg-table th.sort-desc::after { content: " \2193"; color: var(--accent); font-weight: 700; }
+    .reg-table td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--line-2);
+      color: var(--ink-2);
+      vertical-align: top;
+    }
+    .reg-table tbody tr {
+      transition: background 0.1s;
+      cursor: pointer;
+    }
+    .reg-table tbody tr:hover { background: var(--surface-2); }
+    .reg-table tbody tr:last-child td { border-bottom: none; }
+    .reg-table .col-name { color: var(--ink); font-weight: 500; }
+    .reg-table .col-years {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+    .reg-table .col-flag { font-size: 1.1rem; line-height: 1; }
+    .reg-table .col-summary {
+      color: var(--muted);
+      font-size: 0.83rem;
+      max-width: 360px;
+    }
+    .reg-table .col-cf {
+      font-size: 0.78rem;
+      color: var(--muted);
+      max-width: 220px;
+    }
+    .reg-table .col-cf .cf-tag {
+      display: inline-block;
+      background: var(--surface-2);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      margin: 0 0.2rem 0.2rem 0;
+      font-size: 0.72rem;
+    }
+    .reg-table .col-source a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+    .reg-table .col-source a:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      .reg-table th:nth-child(7), .reg-table td:nth-child(7),
+      .reg-table th:nth-child(8), .reg-table td:nth-child(8) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .reg-table th:nth-child(5), .reg-table td:nth-child(5),
+      .reg-table th:nth-child(6), .reg-table td:nth-child(6) { display: none; }
+      .reg-table th, .reg-table td { padding: 0.5rem 0.65rem; font-size: 0.82rem; }
+      .reg-table thead { position: static; }
+    }
+
+    /* Detail modal */
+    .reg-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+    .reg-modal-bg.active { display: block; }
+    .reg-modal {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      max-width: 640px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+      padding: 2rem 2rem;
+    }
+    @media (max-width: 600px) { .reg-modal { padding: 1.4rem; } }
+    .reg-modal .close-x {
+      float: right;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .reg-modal .close-x:hover { color: var(--ink); }
+    .reg-modal h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.7rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0.5rem 0 0.35rem;
+      color: var(--ink);
+    }
+    .reg-modal .modal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .reg-modal .modal-meta span {
+      background: var(--surface-2);
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+    }
+    .reg-modal .modal-summary {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--ink-2);
+      margin-bottom: 1.2rem;
+      padding: 1rem 1.1rem;
+      background: var(--bg-2);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+    .reg-modal .modal-section {
+      margin-bottom: 1rem;
+    }
+    .reg-modal .modal-section h4 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .reg-modal .modal-cf-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .reg-modal .modal-cf-tags .cf-tag {
+      display: inline-block;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: var(--ink-2);
+    }
+    .reg-modal .modal-source-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.55rem 1.1rem;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .reg-modal .modal-source-btn:hover { background: var(--accent); }
+    .reg-modal .modal-coverage {
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--line-2);
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .reg-modal .modal-coverage a {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#reg-main">Skip to registry table</a>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <a href="index.html" style="display:flex;align-items:center;gap:0.7rem;text-decoration:none;color:inherit;">
+          <span class="brand-mark">FA</span>
+          <span class="brand-name">False Accusations Awareness</span>
+        </a>
+      </div>
+      <nav class="topnav">
+        <a href="index.html">Archive</a>
+        <a href="registry.html" style="color:var(--accent);font-weight:600;">Registry</a>
+        <a href="index.html#principles">Principles</a>
+        <a href="index.html#about">About</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a class="ghost-btn" href="https://github.com/desurfofficial-ship-it/false-accusations-awareness" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero" style="padding:4rem 0 3rem;">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-blob hero-blob-a"></div>
+      <div class="hero-blob hero-blob-b"></div>
+    </div>
+    <div class="container hero-inner">
+      <p class="eyebrow"><a href="index.html" style="color:inherit;text-decoration:none;">&larr; Back to editorial archive</a> &middot; <span class="eyebrow-dot"></span></p>
+      <h1>The <em>Registry</em>.</h1>
+      <p class="tagline">A sortable, searchable registry of documented exonerations &mdash; each entry is a one-line summary with a link to the public record. Useful for researchers, journalists, and anyone who wants to see the patterns across hundreds of cases.</p>
+      <div class="hero-stats" id="hero-stats">
+        <div class="hstat"><span class="num">&hellip;</span><span class="label">Loading</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="reg-main">
+
+    <section class="container" style="margin-bottom:2rem;">
+      <div class="reg-loading" id="loading">
+        <div class="spinner"></div>
+        <p>Loading registry data&hellip;</p>
+      </div>
+
+      <!-- Stats dashboard (hidden until data loads) -->
+      <div id="reg-dashboard" style="display:none;">
+        <div class="section-head">
+          <h2>At a glance</h2>
+          <p class="section-sub">Aggregate statistics across all documented cases in the registry</p>
+        </div>
+        <div class="reg-stats" id="reg-stats"></div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="container" id="reg-filters-section" style="display:none;">
+      <div class="section-head">
+        <h2>Search &amp; filter</h2>
+        <p class="section-sub">Filter by country, decade, crime type, or contributing factor &middot; click column headers to sort</p>
+      </div>
+
+      <div class="reg-filters">
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label for="filter-search">Search</label>
+            <input type="text" id="filter-search" placeholder="Name, country, summary, factor&hellip;">
+          </div>
+          <div class="filter-group">
+            <label for="filter-country">Country</label>
+            <select id="filter-country">
+              <option value="">All countries</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-decade">Decade convicted</label>
+            <select id="filter-decade">
+              <option value="">All decades</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-crime">Crime type</label>
+            <select id="filter-crime">
+              <option value="">All crime types</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-factor">Contributing factor</label>
+            <select id="filter-factor">
+              <option value="">All factors</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line-2);">
+          <span id="reg-result-count" style="font-size:0.85rem;color:var(--muted);font-weight:500;">&hellip; cases</span>
+          <button id="reset-filters" class="ghost-btn" style="font-size:0.8rem;">Reset filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table -->
+    <section class="container" style="margin-bottom:5rem;">
+      <div class="reg-table-wrap" id="reg-table-wrap" style="display:none;">
+        <table class="reg-table" id="reg-table">
+          <thead>
+            <tr>
+              <th data-sort="name">Name</th>
+              <th data-sort="year_convicted">Convicted</th>
+              <th data-sort="year_exonerated">Exonerated</th>
+              <th data-sort="years_served">Yrs served</th>
+              <th data-sort="country">Country</th>
+              <th data-sort="crime">Crime</th>
+              <th>Contributing factors</th>
+              <th>Summary</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="reg-tbody"></tbody>
+        </table>
+      </div>
+      <div id="no-results" class="no-results" style="display:none;">
+        <p>No cases match your filters. <button id="reset-filters-2" class="link-btn">Reset filters</button></p>
+      </div>
+    </section>
+
+    <!-- About this registry -->
+    <section class="about container" style="padding-top:0;">
+      <h2>About this registry</h2>
+      <p>This registry page lists documented exonerations in a sortable, filterable table. Each entry includes the exoneree's name, year of conviction and exoneration, country (and US state where applicable), crime type, contributing factors, a one-sentence summary, and a link to a public primary source.</p>
+      <p>The full <a href="https://exonerationregistry.org/" target="_blank" rel="noopener">National Registry of Exonerations</a> hosted by the University of Michigan Law School and University of California Irvine lists ~3,600 cases. That dataset is behind Cloudflare protection, which blocks automated ingestion. The cases shown here are a curated subset drawn from Innocence Project case lists, NRE annual reports, and major investigative reporting &mdash; every entry has a clear public-record source.</p>
+      <p>If you have downloaded the official NRE CSV and want to replace this subset with the full dataset, see <code style="background:var(--bg-2);padding:0.1rem 0.4rem;border-radius:3px;font-size:0.85rem;">scripts/convert_nre_csv.py</code> in the GitHub repository &mdash; it converts the NRE CSV into the JSON format this page reads.</p>
+      <p style="margin-top:1.5rem;"><a href="index.html" style="font-weight:600;border-bottom:1px solid var(--accent);">&larr; Back to the editorial archive (51 in-depth cases)</a></p>
+    </section>
+
+  </main>
+
+  <!-- Detail modal -->
+  <div class="reg-modal-bg" id="reg-modal-bg" onclick="if(event.target===this)closeModal();">
+    <div class="reg-modal" id="reg-modal-content"></div>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="brand-mark">FA</span>
+        <div>
+          <strong>False Accusations Awareness</strong>
+          <p>Registry of documented exonerations. Educational use.</p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <p>Data drawn from public records and Innocence Project case lists.</p>
+        <p class="footer-license">Always consult primary sources.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================================
+    // Theme toggle
+    // ============================================================
+    (function() {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      btn.addEventListener('click', function() {
+        var cur = root.getAttribute('data-theme') || 'light';
+        var next = cur === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('fa-theme', next); } catch (e) {}
+      });
+    })();
+
+    // ============================================================
+    // Registry data + UI
+    // ============================================================
+    var DATA = null;
+    var STATE = {
+      search: '',
+      country: '',
+      decade: '',
+      crime: '',
+      factor: '',
+      sortKey: 'year_exonerated',
+      sortDir: 'desc'
+    };
+
+    var COUNTRY_FLAGS = {
+      US: '\u{1F1FA}\u{1F1F8}',
+      UK: '\u{1F1EC}\u{1F1E7}',
+      IT: '\u{1F1EE}\u{1F1F9}',
+      AU: '\u{1F1E6}\u{1F1FA}',
+      CA: '\u{1F1E8}\u{1F1E6}',
+      JP: '\u{1F1EF}\u{1F1F5}',
+      SE: '\u{1F1F8}\u{1F1EA}',
+      FR: '\u{1F1EB}\u{1F1F7}',
+      IE: '\u{1F1EE}\u{1F1EA}',
+      NZ: '\u{1F1F3}\u{1F1FF}'
+    };
+    var COUNTRY_NAMES = {
+      US: 'United States', UK: 'United Kingdom', IT: 'Italy', AU: 'Australia',
+      CA: 'Canada', JP: 'Japan', SE: 'Sweden', FR: 'France',
+      IE: 'Ireland', NZ: 'New Zealand'
+    };
+
+    function escapeHtml(s) {
+      var div = document.createElement('div');
+      div.textContent = s == null ? '' : String(s);
+      return div.innerHTML;
+    }
+
+    function init() {
+      fetch('assets/data/registry-data.json')
+        .then(function(r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function(data) {
+          DATA = data.cases;
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('reg-dashboard').style.display = '';
+          document.getElementById('reg-filters-section').style.display = '';
+          document.getElementById('reg-table-wrap').style.display = '';
+          renderStats();
+          populateFilters();
+          renderTable();
+          attachListeners();
+        })
+        .catch(function(err) {
+          document.getElementById('loading').innerHTML =
+            '<p style="color:var(--accent);">Failed to load registry data: ' + escapeHtml(err.message) + '</p>' +
+            '<p style="margin-top:1rem;font-size:0.9rem;">The file <code>assets/data/registry-data.json</code> could not be loaded. ' +
+            'If you are running locally, you may need to serve the page over HTTP (e.g. <code>python3 -m http.server</code>) due to fetch/CORS restrictions.</p>';
+        });
+    }
+
+    function renderStats() {
+      var total = DATA.length;
+      var totalYears = DATA.reduce(function(s, c) { return s + c.years_served; }, 0);
+      var countries = {};
+      var decades = {};
+      var factors = {};
+      var crimes = {};
+      DATA.forEach(function(c) {
+        countries[c.country] = (countries[c.country] || 0) + 1;
+        var d = Math.floor(c.year_convicted / 10) * 10;
+        decades[d] = (decades[d] || 0) + 1;
+        crimes[c.category] = (crimes[c.category] || 0) + 1;
+        c.contributing_factors.forEach(function(f) {
+          factors[f] = (factors[f] || 0) + 1;
+        });
+      });
+
+      // Hero stats
+      document.getElementById('hero-stats').innerHTML =
+        '<div class="hstat"><span class="num">' + total + '</span><span class="label">Documented cases</span></div>' +
+        '<div class="hstat"><span class="num">' + totalYears.toLocaleString() + '</span><span class="label">Years wrongfully served</span></div>' +
+        '<div class="hstat"><span class="num">' + Object.keys(countries).length + '</span><span class="label">Countries</span></div>' +
+        '<div class="hstat"><span class="num">' + Math.min.apply(null, DATA.map(function(c){return c.year_convicted;})) + '&ndash;' + Math.max.apply(null, DATA.map(function(c){return c.year_exonerated;})) + '</span><span class="label">Time span</span></div>';
+
+      // Dashboard cards
+      var html = '';
+      html += '<div class="stat-card"><span class="stat-num">' + total + '</span><span class="stat-label">Total cases</span></div>';
+      html += '<div class="stat-card"><span class="stat-num">' + totalYears.toLocaleString() + '</span><span class="stat-label">Years wrongfully served</span></div>';
+      // Top countries distribution
+      var countrySorted = Object.keys(countries).sort(function(a,b){return countries[b]-countries[a];}).slice(0,5);
+      var maxC = countries[countrySorted[0]];
+      html += '<div class="stat-card reg-dist"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.7rem;">Top countries</div>';
+      countrySorted.forEach(function(c) {
+        var pct = (countries[c] / maxC * 100).toFixed(0);
+        html += '<div class="dist-row"><span class="dist-label">' + (COUNTRY_FLAGS[c]||'') + ' ' + COUNTRY_NAMES[c] + '</span>' +
+          '<span class="dist-bar-wrap"><span class="dist-bar" style="width:' + pct + '%"></span></span>' +
+          '<span class="dist-count">' + countries[c] + '</span></div>';
+      });
+      html += '</div>';
+      // Top factors distribution
+      var factorSorted = Object.keys(factors).sort(function(a,b){return factors[b]-factors[a];}).slice(0,5);
+      var maxF = factors[factorSorted[0]];
+      html += '<div class="stat-card reg-dist"><div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.7rem;">Top contributing factors</div>';
+      factorSorted.forEach(function(f) {
+        var pct = (factors[f] / maxF * 100).toFixed(0);
+        html += '<div class="dist-row"><span class="dist-label">' + escapeHtml(f) + '</span>' +
+          '<span class="dist-bar-wrap"><span class="dist-bar" style="width:' + pct + '%"></span></span>' +
+          '<span class="dist-count">' + factors[f] + '</span></div>';
+      });
+      html += '</div>';
+      document.getElementById('reg-stats').innerHTML = html;
+    }
+
+    function populateFilters() {
+      var countries = {}, decades = {}, crimes = {}, factors = {};
+      DATA.forEach(function(c) {
+        countries[c.country] = true;
+        var d = Math.floor(c.year_convicted / 10) * 10;
+        decades[d] = true;
+        crimes[c.category] = true;
+        c.contributing_factors.forEach(function(f) { factors[f] = true; });
+      });
+      var countrySel = document.getElementById('filter-country');
+      Object.keys(countries).sort().forEach(function(c) {
+        var o = document.createElement('option');
+        o.value = c; o.textContent = (COUNTRY_FLAGS[c]||'') + ' ' + COUNTRY_NAMES[c];
+        countrySel.appendChild(o);
+      });
+      var decadeSel = document.getElementById('filter-decade');
+      Object.keys(decades).sort().forEach(function(d) {
+        var o = document.createElement('option');
+        o.value = d; o.textContent = d + 's';
+        decadeSel.appendChild(o);
+      });
+      var crimeSel = document.getElementById('filter-crime');
+      Object.keys(crimes).sort().forEach(function(c) {
+        var o = document.createElement('option');
+        o.value = c; o.textContent = c;
+        crimeSel.appendChild(o);
+      });
+      var factorSel = document.getElementById('filter-factor');
+      Object.keys(factors).sort().forEach(function(f) {
+        var o = document.createElement('option');
+        o.value = f; o.textContent = f;
+        factorSel.appendChild(o);
+      });
+    }
+
+    function getFiltered() {
+      var q = STATE.search.trim().toLowerCase();
+      return DATA.filter(function(c) {
+        if (STATE.country && c.country !== STATE.country) return false;
+        if (STATE.decade) {
+          var d = Math.floor(c.year_convicted / 10) * 10;
+          if (String(d) !== STATE.decade) return false;
+        }
+        if (STATE.crime && c.category !== STATE.crime) return false;
+        if (STATE.factor && c.contributing_factors.indexOf(STATE.factor) === -1) return false;
+        if (q) {
+          var haystack = (c.name + ' ' + c.country + ' ' + (c.state||'') + ' ' + c.crime + ' ' + c.summary + ' ' + c.contributing_factors.join(' ')).toLowerCase();
+          if (haystack.indexOf(q) === -1) return false;
+        }
+        return true;
+      });
+    }
+
+    function sortData(arr) {
+      var k = STATE.sortKey, dir = STATE.sortDir === 'asc' ? 1 : -1;
+      arr.sort(function(a, b) {
+        var av = a[k], bv = b[k];
+        if (typeof av === 'string') return av.localeCompare(bv) * dir;
+        return (av - bv) * dir;
+      });
+      return arr;
+    }
+
+    function renderTable() {
+      var filtered = sortData(getFiltered());
+      var tbody = document.getElementById('reg-tbody');
+      document.getElementById('reg-result-count').textContent =
+        filtered.length + (filtered.length === 1 ? ' case' : ' cases') + ' of ' + DATA.length;
+      document.getElementById('no-results').style.display = filtered.length === 0 ? '' : 'none';
+      document.getElementById('reg-table-wrap').style.display = filtered.length === 0 ? 'none' : '';
+
+      // Update header sort indicators
+      document.querySelectorAll('.reg-table th').forEach(function(th) {
+        th.classList.remove('sort-asc', 'sort-desc');
+        if (th.dataset.sort === STATE.sortKey) {
+          th.classList.add(STATE.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+        }
+      });
+
+      // Render rows
+      var html = filtered.map(function(c) {
+        var cf = c.contributing_factors.map(function(f) {
+          return '<span class="cf-tag">' + escapeHtml(f) + '</span>';
+        }).join('');
+        return '<tr data-id="' + c.id + '">' +
+          '<td class="col-name">' + escapeHtml(c.name) + '</td>' +
+          '<td>' + c.year_convicted + '</td>' +
+          '<td>' + c.year_exonerated + '</td>' +
+          '<td class="col-years">' + c.years_served + '</td>' +
+          '<td class="col-flag" title="' + escapeHtml(COUNTRY_NAMES[c.country]||c.country) + '">' + (COUNTRY_FLAGS[c.country]||c.country) + (c.state ? ' ' + c.state : '') + '</td>' +
+          '<td>' + escapeHtml(c.crime) + '</td>' +
+          '<td class="col-cf">' + cf + '</td>' +
+          '<td class="col-summary">' + escapeHtml(c.summary) + '</td>' +
+          '<td class="col-source"><a href="' + escapeHtml(c.source) + '" target="_blank" rel="noopener" onclick="event.stopPropagation();">View &rarr;</a></td>' +
+          '</tr>';
+      }).join('');
+      tbody.innerHTML = html;
+      // Attach row click handlers
+      tbody.querySelectorAll('tr').forEach(function(tr) {
+        tr.addEventListener('click', function() {
+          var id = parseInt(tr.dataset.id, 10);
+          var c = DATA.find(function(x) { return x.id === id; });
+          if (c) openModal(c);
+        });
+      });
+    }
+
+    function openModal(c) {
+      var cf = c.contributing_factors.map(function(f) {
+        return '<span class="cf-tag">' + escapeHtml(f) + '</span>';
+      }).join('');
+      // Build search links
+      var clean = c.name.replace(/['"`]/g, ' ');
+      var picsQ = encodeURIComponent(clean + ' ' + c.year_exonerated + ' exoneration');
+      var newsQ = encodeURIComponent(clean + ' ' + c.year_exonerated + ' exoneration wrongful conviction');
+      var html = '<button class="close-x" onclick="closeModal()" aria-label="Close">&times;</button>' +
+        '<h2>' + escapeHtml(c.name) + '</h2>' +
+        '<div class="modal-meta">' +
+          '<span>' + (COUNTRY_FLAGS[c.country]||'') + ' ' + escapeHtml(COUNTRY_NAMES[c.country]||c.country) + (c.state ? ' &middot; ' + escapeHtml(c.state) : '') + '</span>' +
+          '<span>Convicted: ' + c.year_convicted + '</span>' +
+          '<span>Exonerated: ' + c.year_exonerated + '</span>' +
+          '<span>' + c.years_served + ' years served</span>' +
+          '<span>Crime: ' + escapeHtml(c.crime) + '</span>' +
+        '</div>' +
+        '<div class="modal-summary">' + escapeHtml(c.summary) + '</div>' +
+        '<div class="modal-section"><h4>Contributing factors</h4><div class="modal-cf-tags">' + cf + '</div></div>' +
+        '<div class="modal-section"><h4>Public record</h4>' +
+          '<a class="modal-source-btn" href="' + escapeHtml(c.source) + '" target="_blank" rel="noopener">Read the primary source &rarr;</a>' +
+        '</div>' +
+        '<div class="modal-coverage"><strong>Pictures &amp; coverage:</strong> ' +
+          '<a href="https://www.google.com/search?q=' + picsQ + '&tbm=isch&hl=en&safe=active" target="_blank" rel="noopener">Find pictures</a> &middot; ' +
+          '<a href="https://news.google.com/search?q=' + newsQ + '&hl=en" target="_blank" rel="noopener">Find news coverage</a>' +
+        '</div>';
+      document.getElementById('reg-modal-content').innerHTML = html;
+      document.getElementById('reg-modal-bg').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    window.closeModal = function() {
+      document.getElementById('reg-modal-bg').classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    window.openModal = openModal;
+
+    function attachListeners() {
+      // Search input
+      var searchTimeout;
+      document.getElementById('filter-search').addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        var v = e.target.value;
+        searchTimeout = setTimeout(function() {
+          STATE.search = v;
+          renderTable();
+        }, 120);
+      });
+      // Select filters
+      ['country','decade','crime','factor'].forEach(function(k) {
+        document.getElementById('filter-' + k).addEventListener('change', function(e) {
+          STATE[k] = e.target.value;
+          renderTable();
+        });
+      });
+      // Sort headers
+      document.querySelectorAll('.reg-table th[data-sort]').forEach(function(th) {
+        th.addEventListener('click', function() {
+          var k = th.dataset.sort;
+          if (STATE.sortKey === k) {
+            STATE.sortDir = STATE.sortDir === 'asc' ? 'desc' : 'asc';
+          } else {
+            STATE.sortKey = k;
+            STATE.sortDir = (k === 'name' || k === 'country' || k === 'crime') ? 'asc' : 'desc';
+          }
+          renderTable();
+        });
+      });
+      // Reset buttons
+      function resetAll() {
+        STATE = { search:'', country:'', decade:'', crime:'', factor:'', sortKey:'year_exonerated', sortDir:'desc' };
+        document.getElementById('filter-search').value = '';
+        document.getElementById('filter-country').value = '';
+        document.getElementById('filter-decade').value = '';
+        document.getElementById('filter-crime').value = '';
+        document.getElementById('filter-factor').value = '';
+        renderTable();
+      }
+      document.getElementById('reset-filters').addEventListener('click', resetAll);
+      document.getElementById('reset-filters-2').addEventListener('click', resetAll);
+      // Escape closes modal
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') {
+          e.preventDefault();
+          document.getElementById('filter-search').focus();
+        }
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

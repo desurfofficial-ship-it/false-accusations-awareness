@@ -658,6 +658,78 @@ section { margin-bottom: 5rem; }
 .source-link:hover { border-bottom-color: var(--accent); }
 
 /* ==========================================================================
+   Coverage links (Pictures & coverage section in each case card)
+   ========================================================================== */
+.coverage {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--line-2);
+}
+.coverage-head {
+  margin-bottom: 0.7rem;
+}
+.coverage-head h4 {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+.coverage-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+.coverage-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+.cov-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: all 0.15s;
+  line-height: 1.2;
+}
+.cov-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+  text-decoration: none;
+}
+.cov-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+.cov-label {
+  white-space: nowrap;
+}
+/* Type-specific accent colors */
+.cov-pics:hover   { background: var(--accent); border-color: var(--accent); }
+.cov-news:hover   { background: var(--accent-2); border-color: var(--accent-2); }
+.cov-wiki:hover   { background: var(--ink); border-color: var(--ink); }
+.cov-outlet:hover { background: var(--accent-3); border-color: var(--accent-3); color: #1a1a1a; }
+.cov-doc:hover    { background: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 600px) {
+  .cov-btn { font-size: 0.72rem; padding: 0.35rem 0.55rem; }
+  .cov-label { white-space: normal; }
+}
+
+/* ==========================================================================
    Principles
    ========================================================================== */
 .principles {
